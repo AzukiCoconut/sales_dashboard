@@ -5,20 +5,20 @@ const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const mongoose = require('mongoose');
 const db = require('./config/connection');
+const { authMiddleware } = require('./utils/authMiddleware');
 
 // Import GraphQL type definitions and resolvers
 const { typeDefs, resolvers } = require('./schemas');
 
-//Later uncomment this line
-// const { authMiddleware } = require('./utils/auth');
-
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+// Create a new Apollo server and pass in our schema data
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  // context: authMiddleware,
+  context: async ({ req }) => await authMiddleware({ req }),
+  introspection: true,
 });
 
 // start the Apollo Server
@@ -28,6 +28,7 @@ async function startApolloServer() {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
+  //this middleware to authenticate requests to the GraphQL API
   server.applyMiddleware({ app });
 
   // Serve static assets
@@ -39,7 +40,6 @@ async function startApolloServer() {
       res.sendFile(path.join(__dirname, '../client/dist/index.html'));
     });
   }
-
   db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`API server running on port http://localhost:${PORT}`);
