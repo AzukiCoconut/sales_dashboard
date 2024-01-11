@@ -109,7 +109,7 @@ Fernando Ibarra [fibarrafdec](https://github.com/fibarrafdec)
 This application is covered under the MIT License.
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-### Copyright © 2023 Fernando Ibarra
+### Copyright © 2024 Group 1
 ```md
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
