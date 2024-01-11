@@ -1,6 +1,4 @@
 import { Schema, model } from "mongoose";
-const monthlyData = require("./monthlyData.js");
-const dailyData = require("./dailyData.js");
 
 const OverallStatSchema = new Schema(
   {
@@ -20,8 +18,20 @@ const OverallStatSchema = new Schema(
       type: Number,
       required: true
     },
-    monthlyData: [monthlyData],
-    dailyData: [dailyData],
+    monthlyData: [
+      {
+        month: String,
+        totalSales: Number,
+        totalUnits: Number
+      }
+    ],
+    dailyData: [
+      {
+        date: String,
+        totalSales: Number,
+        totalUnits: Number
+      }
+    ],
     salesByCateory: {
       type: Map,
       of: Number
