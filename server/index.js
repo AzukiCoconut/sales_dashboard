@@ -6,17 +6,16 @@ const path = require('path');
 const mongoose = require('mongoose');
 const db = require('./config/connection');
 const { authMiddleware } = require('./utils/authMiddleware');
-
 // Import GraphQL type definitions and resolvers
-const { typeDefs, resolvers } = require('./schemas');
+const { combinedTypeDefs, combinedResolvers } = require('./schemas');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-// Create a new Apollo server and pass in our schema data
+// Create a new Apollo server and pass combined schema data
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  typeDefs: combinedTypeDefs,
+  resolvers: combinedResolvers,
   context: async ({ req }) => await authMiddleware({ req }),
   introspection: true,
 });
@@ -25,6 +24,7 @@ const server = new ApolloServer({
 async function startApolloServer() {
   await server.start();
 
+  //This code ensures that Express will understand GraphQL requests when it sees them and that it will respond with the correct data.
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
