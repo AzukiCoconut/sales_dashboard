@@ -1,44 +1,46 @@
-import { Schema, model } from "mongoose";
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const model = mongoose.model;
 
 const OverallStatSchema = new Schema(
   {
     totalCustomers: {
       type: Number,
-      required: true
+      required: true,
     },
     yearlySalesTotal: {
       type: Number,
-      required: true
+      required: true,
     },
     yearlyTotalUnitsSold: {
       type: Number,
-      required: true
+      required: true,
     },
     year: {
       type: Number,
-      required: true
+      required: true,
     },
     monthlyData: [
       {
         month: String,
         totalSales: Number,
-        totalUnits: Number
-      }
+        totalUnits: Number,
+      },
     ],
     dailyData: [
       {
         date: String,
         totalSales: Number,
-        totalUnits: Number
-      }
+        totalUnits: Number,
+      },
     ],
     salesByCateory: {
       type: Map,
-      of: Number
-    }
+      of: Number,
+    },
   },
   { timestamps: true }
 );
 
-const OverallStat = model("OverallStat", OverallStatSchema);
+const OverallStat = model('OverallStat', OverallStatSchema);
 module.exports = OverallStat;

@@ -1,26 +1,26 @@
 const { gql } = require('apollo-server-express');
 
-const productStatTypeDefs = gql`
-  # Define the ProductStat type
-  type ProductStat {
+const overallStatTypeDefs = gql`
+  type OverallStat {
     id: ID!
-    productId: ID!
+    totalCustomers: Int!
     yearlySalesTotal: Float!
-    yearlyTotalSoldUnits: Int!
+    yearlyTotalUnitsSold: Int!
     year: Int!
     monthlyData: [MonthlyData]
     dailyData: [DailyData]
+    salesByCategory: [SalesByCategory]
     createdAt: String!
     updatedAt: String!
   }
-  # Define the MonthlyData type
+
   type MonthlyData {
     id: ID!
     month: String!
     totalSales: Float!
     totalUnits: Int!
   }
-  # Define the DailyData type
+
   type DailyData {
     id: ID!
     date: String!
@@ -28,11 +28,17 @@ const productStatTypeDefs = gql`
     totalUnits: Int!
   }
 
-  # Define the Query type
+  type SalesByCategory {
+    id: ID!
+    category: String!
+    totalSales: Float!
+    totalUnits: Int!
+  }
+
   type Query {
-    productStats: [ProductStat]
-    productStat(id: ID!): ProductStat
+    overallStats: [OverallStat]
+    overallStat(id: ID!): OverallStat
   }
 `;
 
-module.exports = productStatTypeDefs;
+module.exports = overallStatTypeDefs;
