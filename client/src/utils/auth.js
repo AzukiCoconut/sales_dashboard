@@ -1,26 +1,49 @@
-const jwt = require('jsonwebtoken'); // If you're using the User model inside authMiddleware
+import decode from 'jwt-decode';
 
-const signToken = (user) => {
-  return jwt.sign({ data: user._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRE,
-  });
-};
-
-const authMiddleware = ({ req }) => {
-  let token = req.headers.authorization || '';
-
-  if (token.startsWith('Bearer ')) {
-    token = token.slice(7, token.length);
+// create a new class for a user
+class AuthService {
+  // get user data
+  getProfile() {
+    return decode(this.getToken());
   }
 
-  if (token) {
+  // check if user's logged in
+  loggedIn() {
+    // Checks if there is a saved token and it's still valid
+    const token = this.getToken();
+    return !!token && !this.isTokenExpired(token); // handwaiving here
+  }
+
+  // check if token is expired
+  isTokenExpired(token) {
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = decoded.data;
-    } catch (error) {
-      console.log('Invalid token:', error);
+      const decoded = decode(token);
+      if (decoded.exp < Date.now() / 1000) {
+        return true;
+      } else return false;
+    } catch (err) {
+      return false;
     }
   }
 
-  return req;
-};
+  getToken() {
+    // Retrieves the user token from localStorage
+    return localStorage.getItem('id_token');
+  }
+
+  login(idToken) {
+    // Saves user token to localStorage
+    localStorage.setItem('id_token', idToken);
+    window.location.assign('/');
+  }
+
+  logout() {
+    // Clear user token and profile in localStorage
+    localStorage.removeItem('id_token');
+
+    // this will reload the page and reset app 
+    window.location.assign('/');
+  }
+}
+
+export default new AuthService();
