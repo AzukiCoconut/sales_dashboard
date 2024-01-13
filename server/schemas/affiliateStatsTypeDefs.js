@@ -1,21 +1,19 @@
-const { gql } = require('apollo-server-express');
-
-const affiliateStatTypeDefs = gql`
+const affiliateStatTypeDefs = `
   type AffiliateStats {
-    id: ID!
+    _id: ID!
     userId: ID!
     affiliateSales: [Transactions]
   }
 
   type Transactions {
-    id: ID!
+    _id: ID!
     amount: Float
     date: String
   }
 
   type Query {
     affiliateStats: [AffiliateStats]
-    affiliateStat(id: ID!): AffiliateStats
+    affiliateStat(_id: ID!): AffiliateStats
   }
 `;
 

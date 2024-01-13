@@ -1,8 +1,6 @@
-const { gql } = require('apollo-server-express');
-
-const overallStatTypeDefs = gql`
+const overallStatTypeDefs = `
   type OverallStat {
-    id: ID!
+    _id: ID!
     totalCustomers: Int!
     yearlySalesTotal: Float!
     yearlyTotalUnitsSold: Int!
@@ -15,21 +13,21 @@ const overallStatTypeDefs = gql`
   }
 
   type MonthlyData {
-    id: ID!
+    _id: ID!
     month: String!
     totalSales: Float!
     totalUnits: Int!
   }
 
   type DailyData {
-    id: ID!
+    _id: ID!
     date: String!
     totalSales: Float!
     totalUnits: Int!
   }
 
   type SalesByCategory {
-    id: ID!
+    _id: ID!
     category: String!
     totalSales: Float!
     totalUnits: Int!
@@ -37,7 +35,7 @@ const overallStatTypeDefs = gql`
 
   type Query {
     overallStats: [OverallStat]
-    overallStat(id: ID!): OverallStat
+    overallStat(_id: ID!): OverallStat
   }
 `;
 

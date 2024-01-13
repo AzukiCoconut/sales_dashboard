@@ -1,8 +1,6 @@
-const { gql } = require('apollo-server-express');
-
-const productTypeDefs = gql`
+const productTypeDefs = `
   type Product {
-    id: ID!
+    _id: ID!
     name: String!
     price: Float!
     description: String!
@@ -28,7 +26,7 @@ const productTypeDefs = gql`
       supply: Int!
     ): Product
     updateProducts(
-      id: ID!
+      _id: ID!
       name: String
       price: Float
       description: String
@@ -36,7 +34,7 @@ const productTypeDefs = gql`
       rating: Float
       supply: Int
     ): Product
-    deleteProduct(id: ID!): Product
+    deleteProduct(_id: ID!): Product
   }
 `;
 module.exports = productTypeDefs;
