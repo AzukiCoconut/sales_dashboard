@@ -1,10 +1,12 @@
-const { User } = require("../models");
-const { signToken } = require("../utils/authMiddleware");
+const { User } = require('../models');
+const { signToken } = require('../utils/authMiddleware');
 
 const resolvers = {
   Query: {
     // get all users and get a user by id
-    users: async () => await User.find({}),
+    users: async () => {
+      return await User.find({});
+    },
     user: async (_, { _id }) => {
       const params = _id;
       return await User.findById(_id);
@@ -16,7 +18,7 @@ const resolvers = {
         return User.findOne({ _id: context.user._id });
       }
       throw AuthenticationError;
-    }
+    },
   },
   Mutation: {
     // create user mutation
@@ -31,7 +33,7 @@ const resolvers = {
         country,
         occupation,
         phoneNumber,
-        role
+        role,
       }
     ) => {
       const newUser = await User.create({
@@ -43,7 +45,7 @@ const resolvers = {
         country,
         occupation,
         phoneNumber,
-        role
+        role,
       });
       console.log(newUser);
 
@@ -53,15 +55,15 @@ const resolvers = {
 
     // login mutation
     async login(_, { email, password }) {
-      console.log("Attempting login for:", { email, password });
+      console.log('Attempting login for:', { email, password });
       const user = await User.findOne({ email });
       if (!user) {
-        throw new Error("No user found with this email address");
+        throw new Error('No user found with this email address');
       }
       // check if password is correct
       const CorrectPassword = await user.isCorrectPassword(password);
       if (!CorrectPassword) {
-        throw new Error("Incorrect credentials");
+        throw new Error('Incorrect credentials');
       }
       // sign token and return
       const token = signToken(user);
@@ -74,11 +76,11 @@ const resolvers = {
       if (email) updateFields.email = email;
       if (password) updateFields.password = password;
       const updatedUser = await User.findByIdAndUpdate(id, updateFields, {
-        new: true
+        new: true,
       });
       return updatedUser;
-    }
-  }
+    },
+  },
 };
 
 module.exports = resolvers;

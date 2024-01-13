@@ -1,11 +1,11 @@
-const AffiliateStat = require("../models");
+const { AffiliateStats } = require('../models');
 
 const affiliateStatsResolvers = {
   //all Stats and single Stat with id
   Query: {
-    affiliateStats: async () => await affiliateStats.find({}),
-    affiliateStat: async (_, { _id }) => await affiliateStats.findById(_id)
-  }
+    affiliateStats: async () => await AffiliateStats.find({}),
+    affiliateStat: async (_, { _id }) => await AffiliateStats.findById(_id),
+  },
 };
 
 module.exports = affiliateStatsResolvers;

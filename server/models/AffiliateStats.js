@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const model = mongoose.model;
 
 const AffiliateStatSchema = new Schema(
   {
@@ -16,6 +15,6 @@ const AffiliateStatSchema = new Schema(
   { timestamps: true }
 );
 
-const AffiliateStats = model('AffiliateStats', AffiliateStatSchema);
+const AffiliateStats = mongoose.model('AffiliateStats', AffiliateStatSchema);
 
 module.exports = AffiliateStats;

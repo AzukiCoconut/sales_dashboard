@@ -1,13 +1,13 @@
 // Import necessary modules
-require("dotenv").config();
-const express = require("express");
-const { ApolloServer } = require("apollo-server-express");
-const path = require("path");
-const mongoose = require("mongoose");
-const db = require("./config/connection");
-const { authMiddleware } = require("./utils/authMiddleware");
+require('dotenv').config();
+const express = require('express');
+const { ApolloServer } = require('apollo-server-express');
+const path = require('path');
+const mongoose = require('mongoose');
+const db = require('./config/connection');
+const { authMiddleware } = require('./utils/authMiddleware');
 // Import GraphQL type definitions and resolvers
-const { combinedTypeDefs, combinedResolvers } = require("./schemas");
+const { combinedTypeDefs, combinedResolvers } = require('./schemas');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -17,7 +17,7 @@ const server = new ApolloServer({
   typeDefs: combinedTypeDefs,
   resolvers: combinedResolvers,
   context: async ({ req }) => await authMiddleware({ req }),
-  introspection: true
+  introspection: true,
 });
 
 // start the Apollo Server
@@ -32,15 +32,15 @@ async function startApolloServer() {
   server.applyMiddleware({ app });
 
   // Serve static assets
-  app.use("/images", express.static(path.join(__dirname, "../client/images")));
+  app.use('/images', express.static(path.join(__dirname, '../client/images')));
 
-  if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../client/dist")));
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/dist')));
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
     });
   }
-  db.once("open", () => {
+  db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`API server running on port http://localhost:${PORT}`);
       console.log(
