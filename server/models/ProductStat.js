@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const model = mongoose.model;
 
 const ProductStatSchema = new Schema(
   {
@@ -39,6 +38,6 @@ const ProductStatSchema = new Schema(
   { timestamps: true }
 );
 
-const ProductStat = model('ProductStat', ProductStatSchema);
+const ProductStat = mongoose.model('ProductStat', ProductStatSchema);
 
 module.exports = ProductStat;

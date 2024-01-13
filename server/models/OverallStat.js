@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const model = mongoose.model;
 
 const OverallStatSchema = new Schema(
   {
@@ -42,5 +41,5 @@ const OverallStatSchema = new Schema(
   { timestamps: true }
 );
 
-const OverallStat = model('OverallStat', OverallStatSchema);
+const OverallStat = mongoose.model('OverallStat', OverallStatSchema);
 module.exports = OverallStat;
