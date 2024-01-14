@@ -22,7 +22,7 @@ const combinedTypeDefs = [
 ];
 
 // Combined resolvers.
-//Query and Mutation used to combine them into one object, for qury and mutation this is necessary, but for other resolvers it is not!
+//Query and Mutation, Transaction, AffiliateStats used to combine them into one object, for qury and mutation this is necessary, but for other resolvers it is not!
 const combinedResolvers = {
   Query: {
     ...resolvers.Query,
