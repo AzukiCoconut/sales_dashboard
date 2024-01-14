@@ -1,3 +1,4 @@
+// Import necessary dependencies from React and MUI (Material-UI)
 import React, { useState } from "react";
 import {
   Box,
@@ -14,6 +15,7 @@ import {
 import Header from "components/Header";
 import { useGetProductsQuery } from "state/api";
 
+// Product component representing a single product card
 const Product = ({
   _id,
   name,
@@ -24,10 +26,12 @@ const Product = ({
   supply,
   stat
 }) => {
+  // Access MUI theme and manage the expanded state of the card
   const theme = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
+    // Product card styling and structure using MUI Card components
     <Card
       sx={{
         backgroundImage: "none",
@@ -35,6 +39,7 @@ const Product = ({
         borderRadius: "0.55rem"
       }}
     >
+      {/* Card content section */}
       <CardContent>
         <Typography
           sx={{ fontSize: 14 }}
@@ -52,6 +57,8 @@ const Product = ({
         <Rating value={rating} readOnly />
         <Typography variant='body2'>{description}</Typography>
       </CardContent>
+
+      {/* Card actions section */}
       <CardActions>
         <Button
           variant='primary'
@@ -61,6 +68,8 @@ const Product = ({
           See More
         </Button>
       </CardActions>
+
+      {/* Collapsible section with additional information */}
       <Collapse
         in={isExpanded}
         timeout='auto'
@@ -82,13 +91,20 @@ const Product = ({
   );
 };
 
+// Products component displaying a list of products
 const Products = () => {
+  // Fetch product data using the useGetProductsQuery hook
   const { data, isLoading } = useGetProductsQuery();
+  // Check if the screen size is non-mobile
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
 
+  // Return JSX for rendering the Products component
   return (
     <Box m='1.5rem 2.5rem'>
+      {/* Header component with title and subtitle */}
       <Header title='PRODUCTS' subtitle='See your list of products.' />
+
+      {/* Render product cards or display loading message */}
       {data || !isLoading ? (
         <Box
           mt='20px'
@@ -99,6 +115,7 @@ const Products = () => {
           columnGap='1.33%'
           sx={{ "& > div": { gridColumn: isNonMobile ? undefined : "span 4" } }}
         >
+          {/* Map through product data and render individual Product components */}
           {data.map(
             ({
               _id,
@@ -131,4 +148,5 @@ const Products = () => {
   );
 };
 
+// Export the Products component as the default export
 export default Products;

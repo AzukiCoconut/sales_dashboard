@@ -1,3 +1,4 @@
+// Import necessary dependencies from React, MUI (Material-UI), and other libraries
 import React from "react";
 import { Box, useTheme } from "@mui/material";
 import { useGetGeographyQuery } from "state/api";
@@ -5,12 +6,17 @@ import Header from "components/Header";
 import { ResponsiveChoropleth } from "@nivo/geo";
 import { geoData } from "state/geoData";
 
+// Define a functional component named Geography
 const Geography = () => {
+  // Access the theme object using the useTheme hook
   const theme = useTheme();
+  // Fetch data using the useGetGeographyQuery hook
   const { data } = useGetGeographyQuery();
 
+  // Return JSX for rendering the Geography component
   return (
     <Box m='1.5rem 2.5rem'>
+      {/* Header component with title and subtitle */}
       <Header title='GEOGRAPHY' subtitle='Find where your users are located.' />
       <Box
         mt='40px'
@@ -18,9 +24,11 @@ const Geography = () => {
         border={`1px solid ${theme.palette.secondary[200]}`}
         borderRadius='4px'
       >
+        {/* Check if data is available */}
         {data ? (
           <ResponsiveChoropleth
             data={data}
+            // Theme customization for axis, legends, and tooltip
             theme={{
               axis: {
                 domain: {
@@ -65,6 +73,7 @@ const Geography = () => {
             projectionRotation={[0, 0, 0]}
             borderWidth={1.3}
             borderColor='#ffffff'
+            // Legends configuration
             legends={[
               {
                 anchor: "bottom-right",
@@ -79,6 +88,7 @@ const Geography = () => {
                 itemTextColor: theme.palette.secondary[200],
                 itemOpacity: 0.85,
                 symbolSize: 18,
+                // Effects on hover
                 effects: [
                   {
                     on: "hover",
@@ -92,6 +102,7 @@ const Geography = () => {
             ]}
           />
         ) : (
+          // Display loading message if data is not available
           <>Loading...</>
         )}
       </Box>
@@ -99,4 +110,5 @@ const Geography = () => {
   );
 };
 
+// Export the Geography component as the default export
 export default Geography;

@@ -1,9 +1,10 @@
-// color design tokens export
+// COLOR DESIGN TOKENS EXPORT
 export const tokensDark = {
   secondary: {
-    0: "#ffffff", // manually adjusted
-    10: "#f6f6f6", // manually adjusted
-    50: "#f0f0f0", // manually adjusted
+    // Lighter to darker shades of grey
+    0: "#ffffff", // Manually adjusted
+    10: "#f6f6f6", // Manually adjusted
+    50: "#f0f0f0", // Manually adjusted
     100: "#e0e0e0",
     200: "#c2c2c2",
     300: "#a3a3a3",
@@ -13,10 +14,11 @@ export const tokensDark = {
     700: "#3d3d3d",
     800: "#292929",
     900: "#141414",
-    1000: "#000000" // manually adjusted
+    1000: "#000000" // Manually adjusted
   },
 
   primary: {
+    // Shades of teal
     100: "#cfdddb",
     200: "#9fbbb7",
     300: "#6e9894",
@@ -29,8 +31,8 @@ export const tokensDark = {
   }
 
   // secondary: {
-  //   // yellow
-  //   50: "#f0f0f0", // manually adjusted
+  //   // Shades of yellow
+  //   50: "#f0f0f0", // Manually adjusted
   //   100: "#fff6e0",
   //   200: "#ffedc2",
   //   300: "#ffe3a3",
@@ -43,7 +45,7 @@ export const tokensDark = {
   // },
 };
 
-// function that reverses the color palette
+// FUNCTION THAT REVERSES THE COLOR PALETTE
 function reverseTokens(tokensDark) {
   const reversedTokens = {};
   Object.entries(tokensDark).forEach(([key, val]) => {
@@ -60,14 +62,14 @@ function reverseTokens(tokensDark) {
 }
 export const tokensLight = reverseTokens(tokensDark);
 
-// mui theme settings
+// MUI THEME SETTINGS
 export const themeSettings = (mode) => {
   return {
     palette: {
       mode: mode,
       ...(mode === "dark"
         ? {
-            // palette values for dark mode
+            // Palette values for dark mode
             primary: {
               ...tokensDark.primary,
               main: tokensDark.primary[400],
@@ -83,7 +85,7 @@ export const themeSettings = (mode) => {
             }
           }
         : {
-            // palette values for light mode
+            // Palette values for light mode
             primary: {
               ...tokensLight.primary,
               main: tokensDark.secondary[50],
