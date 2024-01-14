@@ -2,7 +2,17 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// SalesByCategory subschema Nested in OverallStatSchema
+const SalesByCategorySchema = new Schema({
+  category: String,
+  totalSales: Number,
+  totalUnits: Number,
+});
+
+// OverallStatSchema to include the SalesByCategorySchema Primary Schema
+
 // Creating a new schema for overall statistics
+
 const OverallStatSchema = new Schema(
   {
     // Total number of customers
@@ -41,11 +51,7 @@ const OverallStatSchema = new Schema(
         totalUnits: Number,
       },
     ],
-    // Sales breakdown by category, represented as a Map of category to total sales
-    salesByCategory: {
-      type: Map,
-      of: Number,
-    },
+    salesByCategory: [SalesByCategorySchema],
   },
   { timestamps: true } // Adding timestamps for createdAt and updatedAt fields
 );
