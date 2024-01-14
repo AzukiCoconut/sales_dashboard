@@ -8,6 +8,8 @@ const overallStatResolvers = require('./overallStatResolvers');
 const overallStatTypeDefs = require('./overallStatTypeDefs');
 const affiliateStatsResolvers = require('./affiliateStatsResolvers');
 const affiliateStatsTypeDefs = require('./affiliateStatsTypeDefs');
+const transactionResolvers = require('./transactionResolvers');
+const transactionTypeDefs = require('./transactionTypeDefs');
 
 // Combine type definitions
 const combinedTypeDefs = [
@@ -16,6 +18,7 @@ const combinedTypeDefs = [
   productStatTypeDefs,
   overallStatTypeDefs,
   affiliateStatsTypeDefs,
+  transactionTypeDefs,
 ];
 
 // Combined resolvers.
@@ -27,10 +30,17 @@ const combinedResolvers = {
     ...productStatResolvers.Query,
     ...overallStatResolvers.Query,
     ...affiliateStatsResolvers.Query,
+    ...transactionResolvers.Query,
   },
   Mutation: {
     ...resolvers.Mutation,
     ...productResolvers.Mutation,
+  },
+  Transaction: {
+    ...transactionResolvers.Transaction,
+  },
+  AffiliateStats: {
+    ...affiliateStatsResolvers.AffiliateStats,
   },
 };
 

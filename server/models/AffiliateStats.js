@@ -9,7 +9,7 @@ const AffiliateStatSchema = new Schema(
     },
     affiliateSales: {
       type: [Schema.Types.ObjectId],
-      ref: 'Transactions',
+      ref: 'Transaction',
     },
   },
   { timestamps: true }
