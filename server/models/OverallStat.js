@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// SalesByCategory subschema Nested in OverallStatSchema
+const SalesByCategorySchema = new Schema({
+  category: String,
+  totalSales: Number,
+  totalUnits: Number,
+});
+
+// OverallStatSchema to include the SalesByCategorySchema Primary Schema
 const OverallStatSchema = new Schema(
   {
     totalCustomers: {
@@ -33,10 +41,7 @@ const OverallStatSchema = new Schema(
         totalUnits: Number,
       },
     ],
-    salesByCateory: {
-      type: Map,
-      of: Number,
-    },
+    salesByCategory: [SalesByCategorySchema],
   },
   { timestamps: true }
 );
