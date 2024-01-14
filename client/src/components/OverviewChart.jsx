@@ -1,18 +1,22 @@
+// Import necessary dependencies from React, MUI (Material-UI), and Nivo
 import React, { useMemo } from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material";
 // import { useGetSalesQuery } from "state/api";
 
+// Define a functional component named OverviewChart
 const OverviewChart = ({ isDashboard = false, view }) => {
+  // Access the theme object using the useTheme hook
   const theme = useTheme();
   // const { data, isLoading } = useGetSalesQuery();
 
+  // useMemo hook to memoize the total sales and total units line data
   const [totalSalesLine, totalUnitsLine] = useMemo(() => {
     if (!data) return [];
 
     const { monthlyData } = data;
     const totalSalesLine = {
-      id: "totalSlaes",
+      id: "totalSales",
       color: theme.palette.secondary.main,
       data: []
     };
@@ -42,13 +46,17 @@ const OverviewChart = ({ isDashboard = false, view }) => {
     );
 
     return [[totalSalesLine], [totalUnitsLine]];
-  }, [data]); //eslint-disable-line react-hooks/exhaustive-deps
+  }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // If data is not available or still loading, display a loading message
   if (!data || isLoading) return "Loading...";
 
+  // Return the ResponsiveLine chart component from Nivo
   return (
     <ResponsiveLine
+      // Data for the chart based on the selected view (sales or units)
       data={view === "sales" ? totalSalesLine : totalUnitsLine}
+      // Theme customization for axis, legend, and tooltip
       theme={{
         axis: {
           domain: {
@@ -82,8 +90,11 @@ const OverviewChart = ({ isDashboard = false, view }) => {
           }
         }
       }}
+      // Margin for the chart
       margin={{ top: 20, right: 50, bottom: 50, left: 70 }}
+      // Scale for x-axis (type: point)
       xScale={{ type: "point" }}
+      // Scale for y-axis
       yScale={{
         type: "linear",
         min: "auto",
@@ -91,13 +102,18 @@ const OverviewChart = ({ isDashboard = false, view }) => {
         stacked: false,
         reverse: false
       }}
+      // Format for y-axis values
       yFormat=' >-.2f'
+      // Curve interpolation type
       curve='catmullRom'
+      // Enable area under the line (for dashboard view)
       enableArea={isDashboard}
+      // Axis configurations
       axisTop={null}
       axisRight={null}
       axisBottom={{
         format: (v) => {
+          // Truncate month names to 3 characters for the dashboard view
           if (isDashboard) return v.slice(0, 3);
           return v;
         },
@@ -105,6 +121,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
+        // Display legend for non-dashboard view
         legend: isDashboard ? "" : "Month",
         legendOffset: 36,
         legendPosition: "middle"
@@ -115,20 +132,25 @@ const OverviewChart = ({ isDashboard = false, view }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
+        // Display legend for non-dashboard view
         legend: isDashboard
           ? ""
           : `Total ${view === "sales" ? "Revenue" : "Units"} for Year`,
         legendOffset: -60,
         legendPosition: "middle"
       }}
+      // Disable grid lines
       enableGridX={false}
       enableGridY={false}
+      // Point customization
       pointSize={10}
       pointColor={{ theme: "background" }}
       pointBorderWidth={2}
       pointBorderColor={{ from: "serieColor" }}
       pointLabelYOffset={-12}
+      // Enable mesh (grid)
       useMesh={true}
+      // Legends configuration (displayed only in non-dashboard view)
       legends={
         !isDashboard
           ? [
@@ -146,6 +168,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
                 symbolSize: 12,
                 symbolShape: "circle",
                 symbolBorderColor: "rgba(0, 0, 0, .5)",
+                // Effects on legend item hover
                 effects: [
                   {
                     on: "hover",
@@ -163,4 +186,5 @@ const OverviewChart = ({ isDashboard = false, view }) => {
   );
 };
 
+// Export the OverviewChart component as the default export
 export default OverviewChart;
