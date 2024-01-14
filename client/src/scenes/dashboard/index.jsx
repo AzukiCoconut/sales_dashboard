@@ -1,3 +1,4 @@
+// Import necessary dependencies from React, MUI (Material-UI), and other libraries
 import React from "react";
 import FlexBetween from "../../components/FlexBetween";
 import Header from "../../components/Header";
@@ -21,11 +22,16 @@ import OverviewChart from "../../components/OverviewChart";
 // import { useGetDashboardQuery } from "state/api";
 import StatBox from "../../components/StatBox";
 
+// Define a functional component named Dashboard
 const Dashboard = () => {
+  // Access the theme object using the useTheme hook
   const theme = useTheme();
+
+  // Check if the screen width is greater than or equal to 1200px
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
   // const { data, isLoading } = useGetDashboardQuery();
 
+  // Define columns for the DataGrid component
   const columns = [
     {
       field: "_id",
@@ -57,11 +63,15 @@ const Dashboard = () => {
     }
   ];
 
+  // Return JSX for rendering the Dashboard component
   return (
     <Box m='1.5rem 2.5rem'>
+      {/* Flex container with space-between alignment for header and button */}
       <FlexBetween>
+        {/* Header component with title and subtitle */}
         <Header title='DASHBOARD' subtitle='Welcome to your dashboard' />
 
+        {/* Button for downloading reports */}
         <Box>
           <Button
             sx={{
@@ -78,6 +88,7 @@ const Dashboard = () => {
         </Box>
       </FlexBetween>
 
+      {/* Container for grid layout */}
       <Box
         mt='20px'
         display='grid'
@@ -88,28 +99,20 @@ const Dashboard = () => {
           "& > div": { gridColumn: isNonMediumScreens ? undefined : "span 12" }
         }}
       >
-        {/* ROW 1 */}
+        {/* Row 1: StatBoxes and OverviewChart */}
         <StatBox
           title='Total Customers'
           value={data && data.totalCustomers}
           increase='+14%'
           description='Since last month'
-          icon={
-            <Email
-              sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
-            />
-          }
+          icon={<Email sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
         />
         <StatBox
           title='Sales Today'
           value={data && data.todayStats.totalSales}
           increase='+21%'
           description='Since last month'
-          icon={
-            <PointOfSale
-              sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
-            />
-          }
+          icon={<PointOfSale sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
         />
         <Box
           gridColumn='span 8'
@@ -118,6 +121,7 @@ const Dashboard = () => {
           p='1rem'
           borderRadius='0.55rem'
         >
+          {/* OverviewChart component for sales */}
           <OverviewChart view='sales' isDashboard={true} />
         </Box>
         <StatBox
@@ -125,25 +129,17 @@ const Dashboard = () => {
           value={data && data.thisMonthStats.totalSales}
           increase='+5%'
           description='Since last month'
-          icon={
-            <PersonAdd
-              sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
-            />
-          }
+          icon={<PersonAdd sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
         />
         <StatBox
           title='Yearly Sales'
           value={data && data.yearlySalesTotal}
           increase='+43%'
           description='Since last month'
-          icon={
-            <Traffic
-              sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
-            />
-          }
+          icon={<Traffic sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
         />
 
-        {/* ROW 2 */}
+        {/* Row 2: DataGrid and BreakdownChart */}
         <Box
           gridColumn='span 8'
           gridRow='span 3'
@@ -173,6 +169,7 @@ const Dashboard = () => {
             }
           }}
         >
+          {/* DataGrid component for transactions */}
           <DataGrid
             loading={isLoading || !data}
             getRowId={(row) => row._id}
@@ -187,6 +184,7 @@ const Dashboard = () => {
           p='1.5rem'
           borderRadius='0.55rem'
         >
+          {/* Typography, BreakdownChart, and description */}
           <Typography variant='h6' sx={{ color: theme.palette.secondary[100] }}>
             Sales By Category
           </Typography>
@@ -196,8 +194,7 @@ const Dashboard = () => {
             fontSize='0.8rem'
             sx={{ color: theme.palette.secondary[200] }}
           >
-            Breakdown of real states and information via category for revenue
-            made for this year and total sales.
+            Breakdown of real states and information via category for revenue made for this year and total sales.
           </Typography>
         </Box>
       </Box>
@@ -205,4 +202,5 @@ const Dashboard = () => {
   );
 };
 
+// Export the Dashboard component as the default export
 export default Dashboard;

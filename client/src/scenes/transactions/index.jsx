@@ -1,3 +1,4 @@
+// Import necessary dependencies from React and MUI (Material-UI)
 import React, { useState } from "react";
 import { Box, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
@@ -5,15 +6,21 @@ import { useGetTransactionsQuery } from "state/api";
 import Header from "components/Header";
 import DataGridCustomToolbar from "components/DataGridCustomToolbar";
 
+// Transactions component displaying a list of transactions
 const Transactions = () => {
+  // Access MUI theme
   const theme = useTheme();
 
+  // State variables for managing pagination, sorting, and search
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState("20");
   const [sort, setSort] = useState({});
   const [search, setSearch] = useState("");
 
+  // Additional state for handling search input in the custom toolbar
   const [searchInput, setSearchInput] = useState("");
+  
+  // Fetch transaction data using the useGetTransactionsQuery hook
   const { data, isLoading } = useGetTransactionsQuery({
     page,
     pageSize,
@@ -21,6 +28,7 @@ const Transactions = () => {
     search
   });
 
+  // Define columns for the DataGrid component
   const columns = [
     {
       field: "_id",
@@ -52,9 +60,13 @@ const Transactions = () => {
     }
   ];
 
+  // Return JSX for rendering the Transactions component
   return (
     <Box m='1.5rem 2.5rem'>
+      {/* Header component with title and subtitle */}
       <Header title='TRANSACTIONS' subtitle='Entire list of transactions' />
+      
+      {/* DataGrid component for rendering transaction data */}
       <Box
         height='80vh'
         sx={{
@@ -78,6 +90,7 @@ const Transactions = () => {
           }
         }}
       >
+        {/* DataGrid component with custom configuration and features */}
         <DataGrid
           initialState={{
             pagination: { paginationModel: { pageSize: 20, page: 0 } }
@@ -106,4 +119,5 @@ const Transactions = () => {
   );
 };
 
+// Export the Transactions component as the default export
 export default Transactions;

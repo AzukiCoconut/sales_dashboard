@@ -1,3 +1,4 @@
+// Import necessary dependencies from React, MUI (Material-UI), and other libraries
 import React, { useMemo, useState } from "react";
 import { Box, useTheme } from "@mui/material";
 import Header from "components/Header";
@@ -6,12 +7,19 @@ import { useGetSalesQuery } from "state/api";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+// Define a functional component named Daily
 const Daily = () => {
+  // State variables for date range selection using React-DatePicker
   const [startDate, setStartDate] = useState(new Date("2021-02-01"));
   const [endDate, setEndDate] = useState(new Date("2021-03-01"));
+
+  // Fetch sales data using the useGetSalesQuery from the API
   const { data } = useGetSalesQuery();
+
+  // Access the theme object using the useTheme hook
   const theme = useTheme();
 
+  // Memoized computation of formatted data based on the selected date range
   const [formattedData] = useMemo(() => {
     if (!data) return [];
 
@@ -50,10 +58,15 @@ const Daily = () => {
     return [formattedData];
   }, [data, startDate, endDate]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Return JSX for rendering the Daily component
   return (
     <Box m='1.5rem 2.5rem'>
+      {/* Header component with title and subtitle */}
       <Header title='DAILY SALES' subtitle='Chart of daily sales' />
+
+      {/* Container for the date range selection and the Nivo Line Chart */}
       <Box height='75vh'>
+        {/* Date range selection using React-DatePicker */}
         <Box display='flex' justifyContent='flex-end'>
           <Box>
             <DatePicker
@@ -76,11 +89,14 @@ const Daily = () => {
           </Box>
         </Box>
 
+        {/* Conditional rendering based on data availability */}
         {data ? (
+          // Nivo ResponsiveLine component rendering the formatted data
           <ResponsiveLine
             data={formattedData}
             theme={{
               axis: {
+                // Styling for axis elements
                 domain: {
                   line: {
                     stroke: theme.palette.secondary[200]
@@ -107,6 +123,7 @@ const Daily = () => {
                 }
               },
               tooltip: {
+                // Styling for tooltip container
                 container: {
                   color: theme.palette.primary.main
                 }
@@ -153,6 +170,7 @@ const Daily = () => {
             pointLabelYOffset={-12}
             useMesh={true}
             legends={[
+              // Legend configuration
               {
                 anchor: "top-right",
                 direction: "column",
@@ -180,6 +198,7 @@ const Daily = () => {
             ]}
           />
         ) : (
+          // Loading state when data is being fetched
           <>Loading...</>
         )}
       </Box>
@@ -187,4 +206,5 @@ const Daily = () => {
   );
 };
 
+// Export the Daily component as the default export
 export default Daily;
