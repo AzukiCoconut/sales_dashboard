@@ -5,11 +5,11 @@ import {
   Menu as MenuIcon,
   Search,
   SettingsOutlined,
-  ArrowDropDownOutlined,
+  ArrowDropDownOutlined
 } from "@mui/icons-material";
 import FlexBetween from "./FlexBetween";
 import { useDispatch } from "react-redux";
-import { setMode } from "state";
+import { setMode } from "../utils";
 import profileImage from "../assets/profile.jpeg";
 import {
   AppBar,
@@ -21,7 +21,7 @@ import {
   Box,
   Typography,
   Menu,
-  MenuItem,
+  MenuItem
 } from "@mui/material";
 
 const Navbar = ({ user, isSideBarOpen, setIsSideBarOpen }) => {
@@ -38,7 +38,7 @@ const Navbar = ({ user, isSideBarOpen, setIsSideBarOpen }) => {
       sx={{
         position: "static",
         background: "none",
-        boxShadow: "none",
+        boxShadow: "none"
       }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -81,7 +81,7 @@ const Navbar = ({ user, isSideBarOpen, setIsSideBarOpen }) => {
                 justifyContent: "space-between",
                 alignItems: "center",
                 textTransform: "none",
-                gap: "1rem",
+                gap: "1rem"
               }}
             >
               <Box
@@ -93,7 +93,7 @@ const Navbar = ({ user, isSideBarOpen, setIsSideBarOpen }) => {
                 borderRadius='50%'
                 sx={{ objectFit: "cover" }}
               />
-              <Box textAlign='left'>
+              {/* <Box textAlign='left'>
                 <Typography
                   fontWeight='bold'
                   fontSize='0.85rem'
@@ -107,7 +107,7 @@ const Navbar = ({ user, isSideBarOpen, setIsSideBarOpen }) => {
                 >
                   {user.occupation}
                 </Typography>
-              </Box>
+              </Box> */}
               <ArrowDropDownOutlined
                 sx={{ color: theme.palette.secondary[300], fontSize: "25px" }}
               />
