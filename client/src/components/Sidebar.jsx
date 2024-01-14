@@ -10,7 +10,7 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-  useTheme,
+  useTheme
 } from "@mui/material";
 import {
   SettingsOutlined,
@@ -26,77 +26,77 @@ import {
   CalendarMonthOutlined,
   AdminPanelSettingsOutlined,
   TrendingUpOutlined,
-  PieChartOutlined,
+  PieChartOutlined
 } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import FlexBetween from "components/FlexBetween";
-import profileImage from "assets/profile.jpeg";
+import FlexBetween from "../components/FlexBetween";
+import profileImage from "../assets/profile.jpeg";
 
 const navItems = [
   {
     text: "Dashboard",
-    icon: <HomeOutlined />,
+    icon: <HomeOutlined />
   },
   {
     text: "Client Facing",
-    icon: null,
+    icon: null
   },
   {
     text: "Products",
-    icon: <ShoppingCartOutlined />,
+    icon: <ShoppingCartOutlined />
   },
   {
     text: "Customers",
-    icon: <Groups2Outlined />,
+    icon: <Groups2Outlined />
   },
   {
     text: "Transactions",
-    icon: <ReceiptLongOutlined />,
+    icon: <ReceiptLongOutlined />
   },
   {
     text: "Geography",
-    icon: <PublicOutlined />,
+    icon: <PublicOutlined />
   },
   {
     text: "Sales",
-    icon: null,
+    icon: null
   },
   {
     text: "Overview",
-    icon: <PointOfSaleOutlined />,
+    icon: <PointOfSaleOutlined />
   },
   {
     text: "Daily",
-    icon: <TodayOutlined />,
+    icon: <TodayOutlined />
   },
   {
     text: "Monthly",
-    icon: <CalendarMonthOutlined />,
+    icon: <CalendarMonthOutlined />
   },
   {
     text: "Breakdown",
-    icon: <PieChartOutlined />,
+    icon: <PieChartOutlined />
   },
   {
     text: "Management",
-    icon: null,
+    icon: null
   },
   {
     text: "Admin",
-    icon: <AdminPanelSettingsOutlined />,
+    icon: <AdminPanelSettingsOutlined />
   },
   {
     text: "Performance",
-    icon: <TrendingUpOutlined />,
-  },
+    icon: <TrendingUpOutlined />
+  }
 ];
 const Sidebar = ({
-  user,
+  // user,
   drawerWidth,
   isSideBarOpen,
   setIsSideBarOpen,
-  isNonMobile,
+  isNonMobile
 }) => {
   const { pathname } = useLocation();
   const [active, setActive] = useState("");
@@ -122,8 +122,8 @@ const Sidebar = ({
               backgroundColor: theme.palette.background.alt,
               boxSizing: "border-box",
               borderWidth: isNonMobile ? 0 : "2px",
-              width: drawerWidth,
-            },
+              width: drawerWidth
+            }
           }}
         >
           <Box width='100%'>
@@ -131,7 +131,7 @@ const Sidebar = ({
               <FlexBetween color={theme.palette.secondary.main}>
                 <Box display='flex' alignItems='center' gap='0.5rem'>
                   <Typography variant='h4' fontWeight='bold'>
-                    ECOMVISION
+                    OCEAN WAVE
                   </Typography>
                 </Box>
                 {!isNonMobile && (
@@ -167,7 +167,7 @@ const Sidebar = ({
                         color:
                           active === lcText
                             ? theme.palette.primary[600]
-                            : theme.palette.secondary[100],
+                            : theme.palette.secondary[100]
                       }}
                     >
                       <ListItemIcon
@@ -176,7 +176,7 @@ const Sidebar = ({
                           color:
                             active === lcText
                               ? theme.palette.primary[600]
-                              : theme.palette.secondary[200],
+                              : theme.palette.secondary[200]
                         }}
                       >
                         {icon}
@@ -204,7 +204,7 @@ const Sidebar = ({
                 borderRadius='50%'
                 sx={{ objectFit: "cover" }}
               />
-              <Box textAlign='left'>
+              {/* <Box textAlign='left'>
                 <Typography
                   fontWeight='bold'
                   fontSize='0.9rem'
@@ -218,11 +218,11 @@ const Sidebar = ({
                 >
                   {user.occupation}
                 </Typography>
-              </Box>
+              </Box> */}
               <SettingsOutlined
                 sx={{
                   color: theme.palette.secondary[300],
-                  fontSize: "25px",
+                  fontSize: "25px"
                 }}
               />
             </FlexBetween>
