@@ -1,3 +1,4 @@
+// Import necessary dependencies from React, MUI (Material-UI), and state/api
 import React from "react";
 import { Box, useTheme } from "@mui/material";
 import { useGetUserPerformanceQuery } from "state/api";
@@ -5,11 +6,16 @@ import { useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
 
+// Define a functional component named Performance
 const Performance = () => {
+  // Access MUI theme
   const theme = useTheme();
+  // Retrieve the user ID from the Redux store
   const userId = useSelector((state) => state.global.userId);
+  // Fetch performance data using the useGetUserPerformanceQuery hook
   const { data, isLoading } = useGetUserPerformanceQuery(userId);
 
+  // Define columns for the DataGrid component
   const columns = [
     {
       field: "_id",
@@ -41,8 +47,10 @@ const Performance = () => {
     }
   ];
 
+  // Return JSX for rendering the Performance component
   return (
     <Box m='1.5rem 2.5rem'>
+      {/* Header component with title and subtitle */}
       <Header
         title='PERFORMANCE'
         subtitle='Track your Affiliate Sales Performance Here'
@@ -51,6 +59,7 @@ const Performance = () => {
         mt='40px'
         height='75vh'
         sx={{
+          // Styling for DataGrid components using MUI theme
           "& .MuiDataGrid-root": {
             border: "none"
           },
@@ -75,6 +84,7 @@ const Performance = () => {
           }
         }}
       >
+        {/* DataGrid component to display performance data in a table */}
         <DataGrid
           loading={isLoading || !data}
           getRowId={(row) => row._id}
@@ -86,4 +96,5 @@ const Performance = () => {
   );
 };
 
+// Export the Performance component as the default export
 export default Performance;
