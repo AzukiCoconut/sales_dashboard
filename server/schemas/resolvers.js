@@ -1,11 +1,16 @@
-const User = require('../models/User');
-const { signToken, AuthenticationError } = require('../utils/authMiddleware');
+const { User } = require('../models');
+const { signToken } = require('../utils/authMiddleware');
 
 const resolvers = {
   Query: {
     // get all users and get a user by id
-    users: async () => await User.find({}),
-    user: async (_, { id }) => await User.findById(id),
+    users: async () => {
+      return await User.find({});
+    },
+    user: async (_, { _id }) => {
+      const params = _id;
+      return await User.findById(_id);
+    },
 
     //me: mean to return the user that's logged in from the context (authMiddleware)
     me: async (parent, args, context) => {
@@ -17,9 +22,32 @@ const resolvers = {
   },
   Mutation: {
     // create user mutation
-    createUser: async (_, { name, email, password }) => {
-      const newUser = new User({ name, email, password });
-      await newUser.save();
+    createUser: async (
+      _,
+      {
+        name,
+        email,
+        password,
+        city,
+        state,
+        country,
+        occupation,
+        phoneNumber,
+        role,
+      }
+    ) => {
+      const newUser = await User.create({
+        name,
+        email,
+        password,
+        city,
+        state,
+        country,
+        occupation,
+        phoneNumber,
+        role,
+      });
+      console.log(newUser);
 
       const token = signToken(newUser);
       return { token, user: newUser };

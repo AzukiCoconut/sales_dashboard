@@ -1,13 +1,19 @@
+// Import necessary dependencies from React and MUI (Material-UI)
 import React from "react";
 import { Box, useTheme } from "@mui/material";
 import { useGetCustomersQuery } from "state/api";
 import Header from "components/Header";
 import { DataGrid } from "@mui/x-data-grid";
 
+// Define a functional component named Customers
 const Customers = () => {
+  // Access the theme object using the useTheme hook
   const theme = useTheme();
+
+  // Fetch customer data using the useGetCustomersQuery from the API
   const { data, isLoading } = useGetCustomersQuery();
 
+  // Define columns for the DataGrid component
   const columns = [
     {
       field: "_id",
@@ -28,6 +34,7 @@ const Customers = () => {
       field: "phoneNumber",
       headerName: "Phone Number",
       flex: 0.5,
+      // Custom cell renderer to format phone number
       renderCell: (params) => {
         return params.value.replace(/^(\d{3})(\d{3})(\d{4})/, "($1)$2-$3");
       }
@@ -49,9 +56,13 @@ const Customers = () => {
     }
   ];
 
+  // Return JSX for rendering the Customers component
   return (
     <Box m='1.5rem 2.5rem'>
+      {/* Header component with title and subtitle */}
       <Header title='CUSTOMERS' subtitle='List of Customers' />
+
+      {/* Box containing styling for the DataGrid */}
       <Box
         mt='40px'
         height='75vh'
@@ -80,6 +91,7 @@ const Customers = () => {
           }
         }}
       >
+        {/* DataGrid component rendering customer data */}
         <DataGrid
           loading={isLoading || !data}
           getRowId={(row) => row._id}
@@ -91,4 +103,5 @@ const Customers = () => {
   );
 };
 
+// Export the Customers component as the default export
 export default Customers;

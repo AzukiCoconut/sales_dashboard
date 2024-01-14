@@ -1,13 +1,13 @@
-const Product = require('../models/Product');
+const { Product } = require("../models");
 
 const productResolvers = {
   Query: {
     products: async () => {
       return await Product.find({});
     },
-    product: async (_, { id }) => {
-      return await Product.findById(id);
-    },
+    product: async (_, { _id }) => {
+      return await Product.findById(_id);
+    }
   },
   Mutation: {
     addProduct: async (
@@ -20,7 +20,7 @@ const productResolvers = {
         description,
         category,
         rating,
-        supply,
+        supply
       });
       await newProduct.save();
       return newProduct;
@@ -28,7 +28,7 @@ const productResolvers = {
 
     updateProducts: async (
       _,
-      { id, name, price, description, category, rating, supply }
+      { _id, name, price, description, category, rating, supply }
     ) => {
       const updateFields = {};
       if (name) updateFields.name = name;
@@ -37,16 +37,20 @@ const productResolvers = {
       if (category) updateFields.category = category;
       if (rating) updateFields.rating = rating;
       if (supply) updateFields.supply = supply;
-      const updatedProduct = await Product.findByIdAndUpdate(id, updateFields, {
-        new: true,
-      });
+      const updatedProduct = await Product.findByIdAndUpdate(
+        _id,
+        updateFields,
+        {
+          new: true
+        }
+      );
       return updatedProduct;
     },
-    deleteProduct: async (_, { id }) => {
-      const deletedProduct = await Product.findByIdAndDelete(id);
+    deleteProduct: async (_, { _id }) => {
+      const deletedProduct = await Product.findByIdAndDelete(_id);
       return deletedProduct;
-    },
-  },
+    }
+  }
 };
 
 module.exports = productResolvers;
