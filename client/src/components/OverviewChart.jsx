@@ -2,19 +2,20 @@
 import React, { useMemo } from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material";
-// import { useGetSalesQuery } from "state/api";
+import { useQuery } from "@apollo/client";
+import { GET_SALES } from "../utils/queries.js";
 
 // Define a functional component named OverviewChart
 const OverviewChart = ({ isDashboard = false, view }) => {
   // Access the theme object using the useTheme hook
   const theme = useTheme();
-  // const { data, isLoading } = useGetSalesQuery();
+  const { loading, data } = useQuery(GET_SALES);
 
   // useMemo hook to memoize the total sales and total units line data
   const [totalSalesLine, totalUnitsLine] = useMemo(() => {
-    if (!data) return [];
+    if (!data?.overallStats[0]) return [];
+    const { monthlyData } = data?.overallStats[0];
 
-    const { monthlyData } = data;
     const totalSalesLine = {
       id: "totalSales",
       color: theme.palette.secondary.main,
@@ -46,10 +47,10 @@ const OverviewChart = ({ isDashboard = false, view }) => {
     );
 
     return [[totalSalesLine], [totalUnitsLine]];
-  }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [data?.overallStats]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // If data is not available or still loading, display a loading message
-  if (!data || isLoading) return "Loading...";
+  if (!data?.overallStats || loading) return "Loading...";
 
   // Return the ResponsiveLine chart component from Nivo
   return (

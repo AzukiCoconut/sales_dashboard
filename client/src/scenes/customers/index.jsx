@@ -1,9 +1,10 @@
 // Import necessary dependencies from React and MUI (Material-UI)
 import React from "react";
 import { Box, useTheme } from "@mui/material";
-import { useGetCustomersQuery } from "state/api";
-import Header from "components/Header";
+import Header from "../../components/Header";
 import { DataGrid } from "@mui/x-data-grid";
+import { CUSTOMERS_QUERY } from "../../utils/queries";
+import { useQuery } from "@apollo/client";
 
 // Define a functional component named Customers
 const Customers = () => {
@@ -11,7 +12,7 @@ const Customers = () => {
   const theme = useTheme();
 
   // Fetch customer data using the useGetCustomersQuery from the API
-  const { data, isLoading } = useGetCustomersQuery();
+  const { loading, data } = useQuery(CUSTOMERS_QUERY);
 
   // Define columns for the DataGrid component
   const columns = [
@@ -93,9 +94,9 @@ const Customers = () => {
       >
         {/* DataGrid component rendering customer data */}
         <DataGrid
-          loading={isLoading || !data}
+          loading={loading || !data.customers}
           getRowId={(row) => row._id}
-          rows={data || []}
+          rows={data?.customers || []}
           columns={columns}
         />
       </Box>

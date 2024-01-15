@@ -12,6 +12,16 @@ import { themeSettings } from "./theme"; // Importing theme settings from a sepa
 import { useSelector } from "react-redux"; // Importing useSelector hook from React-Redux for accessing global state
 // import Dashboard from "./scenes/dashboard"; // Importing the Dashboard component
 import Layout from "./scenes/layout"; // Importing the Layout component
+import Products from "./scenes/products";
+import Customers from "./scenes/customers";
+import Transactions from "./scenes/transactions";
+import Geography from "./scenes/geography";
+import Overview from "./scenes/overview";
+import Daily from "./scenes/daily";
+import Monthly from "./scenes/monthly";
+import Admin from "./scenes/admin";
+import Performance from "./scenes/performance";
+
 import { setContext } from "@apollo/client/link/context";
 
 const httpLink = createHttpLink({
@@ -56,6 +66,15 @@ function App() {
               {/* Setting a default route to the Layout component */}
               <Route element={<Layout />}>
                 <Route path='/' /> {/* Defining a route for the root URL */}
+                <Route path='/products' element={<Products />} />
+                <Route path='/customers' element={<Customers />} />
+                <Route path='/transactions' element={<Transactions />} />
+                <Route path='/geography' element={<Geography />} />
+                <Route path='/overview' element={<Overview />} />
+                <Route path='/daily' element={<Daily />} />
+                <Route path='/monthly' element={<Monthly />} />
+                <Route path='/admin' element={<Admin />} />
+                <Route path='/performance' element={<Performance />} />
               </Route>
             </Routes>
           </ThemeProvider>

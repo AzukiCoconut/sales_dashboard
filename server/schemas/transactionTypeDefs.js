@@ -1,11 +1,11 @@
 const transactionTypeDefs = `
   type Transaction {
     _id: ID!
-  userId: String
-  cost: Float
-  amount: Float
-  date: String
-  products: [Product]
+    userId: String
+    cost: Float
+    amount: Float
+    date: String
+    products: [Product]
     createdAt: String
     updatedAt: String
   }

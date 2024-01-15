@@ -1,4 +1,4 @@
-const { Product } = require("../models");
+const { Product, ProductStat } = require("../models");
 
 const productResolvers = {
   Query: {
@@ -7,7 +7,12 @@ const productResolvers = {
     },
     product: async (_, { _id }) => {
       return await Product.findById(_id);
-    }
+    },
+    productsWithStats: async () => {
+      return await ProductStat.find({}).populate("productId");
+    },
+    productStats: async () => await ProductStat.find({}),
+    productStat: async (_, { _id }) => await ProductStat.findById(_id)
   },
   Mutation: {
     addProduct: async (

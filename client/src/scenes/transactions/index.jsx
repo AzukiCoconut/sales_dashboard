@@ -2,31 +2,17 @@
 import React, { useState } from "react";
 import { Box, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { useGetTransactionsQuery } from "state/api";
-import Header from "components/Header";
-import DataGridCustomToolbar from "components/DataGridCustomToolbar";
+import Header from "../../components/Header";
+import { GET_TRANSACTIONS } from "../../utils/queries";
+import { useQuery } from "@apollo/client";
 
 // Transactions component displaying a list of transactions
 const Transactions = () => {
   // Access MUI theme
   const theme = useTheme();
 
-  // State variables for managing pagination, sorting, and search
-  const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState("20");
-  const [sort, setSort] = useState({});
-  const [search, setSearch] = useState("");
-
-  // Additional state for handling search input in the custom toolbar
-  const [searchInput, setSearchInput] = useState("");
-  
   // Fetch transaction data using the useGetTransactionsQuery hook
-  const { data, isLoading } = useGetTransactionsQuery({
-    page,
-    pageSize,
-    sort: JSON.stringify(sort),
-    search
-  });
+  const { loading, data } = useQuery(GET_TRANSACTIONS);
 
   // Define columns for the DataGrid component
   const columns = [
@@ -65,7 +51,7 @@ const Transactions = () => {
     <Box m='1.5rem 2.5rem'>
       {/* Header component with title and subtitle */}
       <Header title='TRANSACTIONS' subtitle='Entire list of transactions' />
-      
+
       {/* DataGrid component for rendering transaction data */}
       <Box
         height='80vh'
@@ -92,27 +78,10 @@ const Transactions = () => {
       >
         {/* DataGrid component with custom configuration and features */}
         <DataGrid
-          initialState={{
-            pagination: { paginationModel: { pageSize: 20, page: 0 } }
-          }}
-          loading={isLoading || !data}
+          loading={loading || !data?.transactions}
           getRowId={(row) => row._id}
-          rows={(data && data.transactions) || []}
+          rows={data?.transactions || []}
           columns={columns}
-          rowCount={(data && data.total) || 0}
-          pageSizeOptions={[20, 50, 100]}
-          pagination
-          page={page}
-          pageSize={pageSize}
-          paginationMode='server'
-          sortingMode='server'
-          onPageChange={(newPage) => setPage(newPage)}
-          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-          onSortModelChange={(newSortModel) => setSort(...newSortModel)}
-          components={{ Toolbar: DataGridCustomToolbar }}
-          componentsProps={{
-            toolbar: { searchInput, setSearchInput, setSearch }
-          }}
         />
       </Box>
     </Box>

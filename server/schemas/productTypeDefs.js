@@ -7,13 +7,42 @@ const productTypeDefs = `
     category: String!
     rating: Float!
     supply: Int!
+
     createdAt: String!
     updatedAt: String!
+  }
+ type ProductStat {
+    _id: ID!
+    productId: Product
+    yearlySalesTotal: Float!
+    yearlyTotalSoldUnits: Int!
+    year: Int
+    monthlyData: [MonthlyData]
+    dailyData: [DailyData]
+    createdAt: String!
+    updatedAt: String!
+  }
+  # Define the MonthlyData type
+  type MonthlyData {
+    _id: ID!
+    month: String!
+    totalSales: Float!
+    totalUnits: Int!
+  }
+  # Define the DailyData type
+  type DailyData {
+    _id: ID!
+    date: String!
+    totalSales: Float!
+    totalUnits: Int!
   }
 
   type Query {
     products: [Product]
     product(id: ID!): Product
+    productsWithStats: [ProductStat]
+    productStats: [ProductStat]
+    productStat(_id: ID!): ProductStat
   }
 
   type Mutation {

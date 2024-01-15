@@ -12,8 +12,9 @@ import {
   useTheme,
   useMediaQuery
 } from "@mui/material";
-import Header from "components/Header";
-import { useGetProductsQuery } from "state/api";
+import Header from "../../components/Header";
+import { useQuery } from "@apollo/client";
+import { PRODUCTS_WITH_STATS } from "../../utils/queries";
 
 // Product component representing a single product card
 const Product = ({
@@ -24,7 +25,8 @@ const Product = ({
   rating,
   category,
   supply,
-  stat
+  yearlySalesTotal,
+  yearlyTotalSoldUnits
 }) => {
   // Access MUI theme and manage the expanded state of the card
   const theme = useTheme();
@@ -74,16 +76,14 @@ const Product = ({
         in={isExpanded}
         timeout='auto'
         unmountOnExit
-        sx={{ color: theme.palette.neutral[300] }}
+        sx={{ color: theme.palette.secondary[300] }}
       >
         <CardContent>
           <Typography>id: {_id}</Typography>
           <Typography>Supply Left: {supply}</Typography>
+          <Typography>Yearly Sales This Year: {yearlySalesTotal}</Typography>
           <Typography>
-            Yearly Sales This Year: {stat.yearlySalesTotal}
-          </Typography>
-          <Typography>
-            Yearly Units Sold This Year: {stat.yearlyTotalSoldUnits}
+            Yearly Units Sold This Year: {yearlyTotalSoldUnits}
           </Typography>
         </CardContent>
       </Collapse>
@@ -94,7 +94,7 @@ const Product = ({
 // Products component displaying a list of products
 const Products = () => {
   // Fetch product data using the useGetProductsQuery hook
-  const { data, isLoading } = useGetProductsQuery();
+  const { loading, data } = useQuery(PRODUCTS_WITH_STATS);
   // Check if the screen size is non-mobile
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
 
@@ -105,7 +105,7 @@ const Products = () => {
       <Header title='PRODUCTS' subtitle='See your list of products.' />
 
       {/* Render product cards or display loading message */}
-      {data || !isLoading ? (
+      {data?.productsWithStats || !loading ? (
         <Box
           mt='20px'
           display='grid'
@@ -116,27 +116,19 @@ const Products = () => {
           sx={{ "& > div": { gridColumn: isNonMobile ? undefined : "span 4" } }}
         >
           {/* Map through product data and render individual Product components */}
-          {data.map(
-            ({
-              _id,
-              name,
-              description,
-              price,
-              rating,
-              category,
-              supply,
-              stat
-            }) => (
+          {data?.productsWithStats.map(
+            ({ productId, yearlySalesTotal, yearlyTotalSoldUnits }) => (
               <Product
-                key={_id}
-                _id={_id}
-                name={name}
-                description={description}
-                price={price}
-                rating={rating}
-                category={category}
-                supply={supply}
-                stat={stat}
+                key={productId._id}
+                _id={productId._id}
+                name={productId.name}
+                description={productId.description}
+                price={productId.price}
+                rating={productId.rating}
+                category={productId.category}
+                supply={productId.supply}
+                yearlySalesTotal={yearlySalesTotal}
+                yearlyTotalSoldUnits={yearlyTotalSoldUnits}
               />
             )
           )}

@@ -1,8 +1,8 @@
 // Import necessary dependencies from React and MUI (Material-UI) libraries
 import React, { useState } from "react";
 import { FormControl, MenuItem, InputLabel, Box, Select } from "@mui/material";
-import Header from "components/Header";
-import OverviewChart from "components/OverviewChart";
+import Header from "../../components/Header";
+import OverviewChart from "../../components/OverviewChart";
 
 // Define a functional component named Overview
 const Overview = () => {
@@ -13,7 +13,10 @@ const Overview = () => {
   return (
     <Box m='1.5rem 2.5rem'>
       {/* Header component with title and subtitle */}
-      <Header title='OVERVIEW' subtitle='Overview of general revenue and profit' />
+      <Header
+        title='OVERVIEW'
+        subtitle='Overview of general revenue and profit'
+      />
       <Box height='75vh'>
         {/* Form control for selecting the view (Sales or Units) */}
         <FormControl sx={{ mt: "1rem" }}>
