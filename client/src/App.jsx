@@ -21,6 +21,7 @@ import Daily from "./scenes/daily";
 import Monthly from "./scenes/monthly";
 import Admin from "./scenes/admin";
 import Performance from "./scenes/performance";
+import SignInSide from "./scenes/SignInSide";
 
 import { setContext } from "@apollo/client/link/context";
 
@@ -65,7 +66,8 @@ function App() {
             <Routes>
               {/* Setting a default route to the Layout component */}
               <Route element={<Layout />}>
-                <Route path='/' /> {/* Defining a route for the root URL */}
+                <Route path='/' element={<Navigate to='/SignInSide' replace />} /> {/* Defining a route for the root URL */}
+                <Route path='/dashboard' element={<Products />} />
                 <Route path='/products' element={<Products />} />
                 <Route path='/customers' element={<Customers />} />
                 <Route path='/transactions' element={<Transactions />} />
@@ -75,6 +77,7 @@ function App() {
                 <Route path='/monthly' element={<Monthly />} />
                 <Route path='/admin' element={<Admin />} />
                 <Route path='/performance' element={<Performance />} />
+                <Route path='/SignInSide' element={<SignInSide/>} />
               </Route>
             </Routes>
           </ThemeProvider>

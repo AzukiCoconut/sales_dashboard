@@ -14,6 +14,7 @@ import {
   useTheme
 } from "@mui/material";
 import {
+  LoginOutlined,
   SettingsOutlined,
   ChevronLeft,
   ChevronRightOutlined,
