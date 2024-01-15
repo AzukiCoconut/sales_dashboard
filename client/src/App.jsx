@@ -21,6 +21,7 @@ import Daily from "./scenes/daily";
 import Monthly from "./scenes/monthly";
 import Admin from "./scenes/admin";
 import Performance from "./scenes/performance";
+
 import { setContext } from "@apollo/client/link/context";
 
 const httpLink = createHttpLink({
