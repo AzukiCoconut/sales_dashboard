@@ -1,24 +1,21 @@
-const typeDefs = require('./typeDefs');
-const resolvers = require('./resolvers');
-const productTypeDefs = require('./productTypeDefs');
-const productResolvers = require('./productResolvers');
-const productStatResolvers = require('./productStatResolvers');
-const productStatTypeDefs = require('./productStatTypeDefs');
-const overallStatResolvers = require('./overallStatResolvers');
-const overallStatTypeDefs = require('./overallStatTypeDefs');
-const affiliateStatsResolvers = require('./affiliateStatsResolvers');
-const affiliateStatsTypeDefs = require('./affiliateStatsTypeDefs');
-const transactionResolvers = require('./transactionResolvers');
-const transactionTypeDefs = require('./transactionTypeDefs');
+const typeDefs = require("./typeDefs");
+const resolvers = require("./resolvers");
+const productTypeDefs = require("./productTypeDefs");
+const productResolvers = require("./productResolvers");
+const overallStatResolvers = require("./overallStatResolvers");
+const overallStatTypeDefs = require("./overallStatTypeDefs");
+const affiliateStatsResolvers = require("./affiliateStatsResolvers");
+const affiliateStatsTypeDefs = require("./affiliateStatsTypeDefs");
+const transactionResolvers = require("./transactionResolvers");
+const transactionTypeDefs = require("./transactionTypeDefs");
 
 // Combine type definitions
 const combinedTypeDefs = [
   typeDefs,
   productTypeDefs,
-  productStatTypeDefs,
   overallStatTypeDefs,
   affiliateStatsTypeDefs,
-  transactionTypeDefs,
+  transactionTypeDefs
 ];
 
 // Combined resolvers.
@@ -27,21 +24,20 @@ const combinedResolvers = {
   Query: {
     ...resolvers.Query,
     ...productResolvers.Query,
-    ...productStatResolvers.Query,
     ...overallStatResolvers.Query,
     ...affiliateStatsResolvers.Query,
-    ...transactionResolvers.Query,
+    ...transactionResolvers.Query
   },
   Mutation: {
     ...resolvers.Mutation,
-    ...productResolvers.Mutation,
+    ...productResolvers.Mutation
   },
   Transaction: {
-    ...transactionResolvers.Transaction,
+    ...transactionResolvers.Transaction
   },
   AffiliateStats: {
-    ...affiliateStatsResolvers.AffiliateStats,
-  },
+    ...affiliateStatsResolvers.AffiliateStats
+  }
 };
 
 module.exports = { combinedTypeDefs, combinedResolvers };

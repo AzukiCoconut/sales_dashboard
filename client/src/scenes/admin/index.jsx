@@ -1,9 +1,10 @@
 // Import necessary dependencies from React, MUI (Material-UI), and custom components
 import React from "react";
 import { Box, useTheme } from "@mui/material";
-import { useGetAdminsQuery } from "state/api";
 import { DataGrid } from "@mui/x-data-grid";
-import Header from "components/Header";
+import Header from "../../components/Header";
+import { useQuery } from "@apollo/client";
+import { GET_ADMINS } from "../../utils/queries";
 
 // Define a functional component named Admin
 const Admin = () => {
@@ -11,7 +12,7 @@ const Admin = () => {
   const theme = useTheme();
 
   // Fetch admin data using the useGetAdminsQuery from the API
-  const { data, isLoading } = useGetAdminsQuery();
+  const { loading, data } = useQuery(GET_ADMINS);
 
   // Define columns for the DataGrid component
   const columns = [
@@ -93,9 +94,9 @@ const Admin = () => {
       >
         {/* DataGrid component rendering admin data */}
         <DataGrid
-          loading={isLoading || !data}
+          loading={loading || !data?.getAdmins}
           getRowId={(row) => row._id}
-          rows={data || []}
+          rows={data?.getAdmins || []}
           columns={columns}
         />
       </Box>

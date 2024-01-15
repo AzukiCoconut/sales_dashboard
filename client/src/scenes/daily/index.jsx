@@ -1,9 +1,10 @@
 // Import necessary dependencies from React, MUI (Material-UI), and other libraries
 import React, { useMemo, useState } from "react";
 import { Box, useTheme } from "@mui/material";
-import Header from "components/Header";
+import Header from "../../components/Header";
 import { ResponsiveLine } from "@nivo/line";
-import { useGetSalesQuery } from "state/api";
+import { useQuery } from "@apollo/client";
+import { GET_SALES } from "../../utils/queries.js";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -14,16 +15,16 @@ const Daily = () => {
   const [endDate, setEndDate] = useState(new Date("2021-03-01"));
 
   // Fetch sales data using the useGetSalesQuery from the API
-  const { data } = useGetSalesQuery();
+  const { data } = useQuery(GET_SALES);
 
   // Access the theme object using the useTheme hook
   const theme = useTheme();
 
   // Memoized computation of formatted data based on the selected date range
   const [formattedData] = useMemo(() => {
-    if (!data) return [];
+    if (!data?.overallStats[0]) return [];
 
-    const { dailyData } = data;
+    const { dailyData } = data?.overallStats[0];
     const totalSalesLine = {
       id: "totalSales",
       color: theme.palette.secondary.main,
@@ -56,7 +57,7 @@ const Daily = () => {
 
     const formattedData = [totalSalesLine, totalUnitsLine];
     return [formattedData];
-  }, [data, startDate, endDate]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [data?.overallStats[0], startDate, endDate]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Return JSX for rendering the Daily component
   return (

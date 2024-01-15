@@ -1,19 +1,21 @@
 // Import necessary dependencies from React, MUI (Material-UI), and state/api
 import React from "react";
 import { Box, useTheme } from "@mui/material";
-import { useGetUserPerformanceQuery } from "state/api";
-import { useSelector } from "react-redux";
+import { useQuery } from "@apollo/client";
+import { GET_SALES_PERFORMANCE } from "../../utils/queries";
 import { DataGrid } from "@mui/x-data-grid";
-import Header from "components/Header";
+import Header from "../../components/Header";
 
 // Define a functional component named Performance
 const Performance = () => {
   // Access MUI theme
   const theme = useTheme();
   // Retrieve the user ID from the Redux store
-  const userId = useSelector((state) => state.global.userId);
+
   // Fetch performance data using the useGetUserPerformanceQuery hook
-  const { data, isLoading } = useGetUserPerformanceQuery(userId);
+  const { loading, data } = useQuery(GET_SALES_PERFORMANCE, {
+    variables: { id: "63701cc1f03239b7f700000e" }
+  });
 
   // Define columns for the DataGrid component
   const columns = [
@@ -86,9 +88,9 @@ const Performance = () => {
       >
         {/* DataGrid component to display performance data in a table */}
         <DataGrid
-          loading={isLoading || !data}
+          loading={loading || !data?.getUserPerformance}
           getRowId={(row) => row._id}
-          rows={(data && data.sales) || []}
+          rows={data?.getUserPerformance.sales || []}
           columns={columns}
         />
       </Box>

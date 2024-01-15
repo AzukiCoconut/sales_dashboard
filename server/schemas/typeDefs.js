@@ -15,6 +15,15 @@ const typeDefs = `
     updatedAt: String
   }
 
+  type locationFormatted {
+    id: String
+    value: Int
+  }
+
+  type salesPerformance {
+    user: User
+    sales: [Transaction]
+  }
   type Auth {
     token: ID
     user: User
@@ -23,6 +32,10 @@ const typeDefs = `
   type Query {
     users: [User]
     user(_id: ID!): User
+    customers: [User]
+    getGeography: [locationFormatted]
+    getAdmins: [User]
+    getUserPerformance(_id: ID!): salesPerformance
     me: User
   }
 

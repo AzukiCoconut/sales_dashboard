@@ -3,12 +3,15 @@ import React, { useState } from "react";
 import { Box, useMediaQuery } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { QUERY_ME } from "../../utils/queries";
+import { useQuery } from "@apollo/client";
 import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
 // import { useGetUserQuery } from "state/api";
 
 // Define a functional component named Layout
 function Layout() {
+  const { loading, data } = useQuery(QUERY_ME);
   // Use the useMediaQuery hook to check for non-mobile screens
   const isNonMobile = useMediaQuery("(min-width: 600px)");
   // State to manage the open/closed state of the sidebar
@@ -22,7 +25,7 @@ function Layout() {
     <Box display={isNonMobile ? "flex" : "block"} width='100%' height='100%'>
       {/* Sidebar component */}
       <Sidebar
-        // user={data || {}} // Pass user data to the Sidebar component (commented out)
+        //user={data?.me || {}} // Pass user data to the Sidebar component
         isNonMobile={isNonMobile}
         drawerWidth='250px'
         isSideBarOpen={isSideBarOpen}
@@ -31,7 +34,7 @@ function Layout() {
       <Box flexGrow={1}>
         {/* Navbar component */}
         <Navbar
-          // user={data || {}} // Pass user data to the Navbar component (commented out)
+          //user={data?.me || {}} // Pass user data to the Navbar component
           isSideBarOpen={isSideBarOpen}
           setIsSideBarOpen={setIsSideBarOpen}
         />

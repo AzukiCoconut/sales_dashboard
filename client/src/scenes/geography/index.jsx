@@ -1,17 +1,18 @@
 // Import necessary dependencies from React, MUI (Material-UI), and other libraries
 import React from "react";
 import { Box, useTheme } from "@mui/material";
-import { useGetGeographyQuery } from "state/api";
-import Header from "components/Header";
+import Header from "../../components/Header";
 import { ResponsiveChoropleth } from "@nivo/geo";
-import { geoData } from "state/geoData";
+import { geoData } from "../../utils/geoData.js";
+import { useQuery } from "@apollo/client";
+import { GET_GEOGRAPHY } from "../../utils/queries.js";
 
 // Define a functional component named Geography
 const Geography = () => {
   // Access the theme object using the useTheme hook
   const theme = useTheme();
   // Fetch data using the useGetGeographyQuery hook
-  const { data } = useGetGeographyQuery();
+  const { data } = useQuery(GET_GEOGRAPHY);
 
   // Return JSX for rendering the Geography component
   return (
@@ -27,7 +28,7 @@ const Geography = () => {
         {/* Check if data is available */}
         {data ? (
           <ResponsiveChoropleth
-            data={data}
+            data={data?.getGeography}
             // Theme customization for axis, legends, and tooltip
             theme={{
               axis: {

@@ -1,24 +1,25 @@
 // Import necessary dependencies from React, MUI (Material-UI), and other libraries
 import React, { useMemo } from "react";
 import { Box, useTheme } from "@mui/material";
-import Header from "components/Header";
+import Header from "../../components/Header";
 import { ResponsiveLine } from "@nivo/line";
-import { useGetSalesQuery } from "state/api";
+import { useQuery } from "@apollo/client";
+import { GET_SALES } from "../../utils/queries.js";
 
 // Define a functional component named Monthly
 const Monthly = () => {
   // Fetch sales data using the useGetSalesQuery hook
-  const { data } = useGetSalesQuery();
+  const { loading, data } = useQuery(GET_SALES);
   // Access the theme object from MUI
   const theme = useTheme();
 
   // Use useMemo to format data only when data changes
   const [formattedData] = useMemo(() => {
     // Return an empty array if data is not available
-    if (!data) return [];
+    if (!data?.overallStats[0]) return [];
 
     // Extract monthlyData from the fetched data
-    const { monthlyData } = data;
+    const { monthlyData } = data?.overallStats[0];
 
     // Initialize lines for totalSales and totalUnits
     const totalSalesLine = {
@@ -34,13 +35,19 @@ const Monthly = () => {
 
     // Loop through monthlyData to populate lines
     Object.values(monthlyData).forEach(({ month, totalSales, totalUnits }) => {
-      totalSalesLine.data = [...totalSalesLine.data, { x: month, y: totalSales }];
-      totalUnitsLine.data = [...totalUnitsLine.data, { x: month, y: totalUnits }];
+      totalSalesLine.data = [
+        ...totalSalesLine.data,
+        { x: month, y: totalSales }
+      ];
+      totalUnitsLine.data = [
+        ...totalUnitsLine.data,
+        { x: month, y: totalUnits }
+      ];
     });
-
     // Return formatted data array containing totalSalesLine and totalUnitsLine
-    return [totalSalesLine, totalUnitsLine];
-  }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
+    const formattedData = [totalSalesLine, totalUnitsLine];
+    return [formattedData];
+  }, [data?.overallStats[0]]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Return JSX for rendering the Monthly component
   return (
@@ -58,7 +65,13 @@ const Monthly = () => {
               axis: {
                 domain: { line: { stroke: theme.palette.secondary[200] } },
                 legend: { text: { fill: theme.palette.secondary[200] } },
-                ticks: { line: { stroke: theme.palette.secondary[200], strokeWidth: 1 }, text: { fill: theme.palette.secondary[200] } }
+                ticks: {
+                  line: {
+                    stroke: theme.palette.secondary[200],
+                    strokeWidth: 1
+                  },
+                  text: { fill: theme.palette.secondary[200] }
+                }
               },
               // Tooltip styling
               tooltip: { container: { color: theme.palette.primary.main } },
@@ -68,7 +81,13 @@ const Monthly = () => {
             colors={{ datum: "color" }}
             margin={{ top: 50, right: 50, bottom: 70, left: 60 }}
             xScale={{ type: "point" }}
-            yScale={{ type: "linear", min: "auto", max: "auto", stacked: false, reverse: false }}
+            yScale={{
+              type: "linear",
+              min: "auto",
+              max: "auto",
+              stacked: false,
+              reverse: false
+            }}
             yFormat=' >-.2f'
             axisTop={null}
             axisRight={null}
