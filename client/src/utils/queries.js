@@ -140,3 +140,45 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+export const GET_DASHBOARD_STATS = gql`
+  query GetDashboardStats {
+    getDashboardStats {
+      totalCustomers
+      yearlySalesTotal
+      yearlyTotalSoldUnits
+      monthlyData {
+        month
+        totalSales
+        totalUnits
+      }
+      thisMonthStats {
+        month
+        totalSales
+        totalUnits
+      }
+      todayStats {
+        date
+        totalSales
+        totalUnits
+      }
+      transactions {
+        _id
+        amount
+        cost
+        createdAt
+        date
+        products {
+          _id
+          category
+          description
+          name
+          price
+          rating
+          supply
+        }
+        userId
+      }
+    }
+  }
+`;

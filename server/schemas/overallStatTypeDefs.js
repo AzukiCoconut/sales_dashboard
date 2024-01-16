@@ -25,9 +25,20 @@ type DailyData {
   totalUnits: Int
 }
 
+type dashboardStats {
+  totalCustomers: Int
+  yearlyTotalSoldUnits: Int
+  yearlySalesTotal: Int
+  monthlyData: [MonthlyData]
+  dailyData: [DailyData]
+  thisMonthStats: MonthlyData
+  todayStats: DailyData
+  transactions: [Transaction]
+}
 type Query {
   overallStats: [OverallStat]
   overallStat(_id: ID!): OverallStat
+  getDashboardStats: dashboardStats
 }
 `;
 

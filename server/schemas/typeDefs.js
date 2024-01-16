@@ -24,6 +24,7 @@ const typeDefs = `
     user: User
     sales: [Transaction]
   }
+
   type Auth {
     token: ID
     user: User
