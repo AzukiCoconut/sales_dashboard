@@ -21,8 +21,8 @@ import Daily from "./scenes/daily";
 import Monthly from "./scenes/monthly";
 import Admin from "./scenes/admin";
 import Performance from "./scenes/performance";
-import SignInSide from "./scenes/SignInSide";
-
+import Login from "./scenes/login";
+import Signup from "./scenes/signup";
 import { setContext } from "@apollo/client/link/context";
 
 const httpLink = createHttpLink({
@@ -66,7 +66,7 @@ function App() {
             <Routes>
               {/* Setting a default route to the Layout component */}
               <Route element={<Layout />}>
-                <Route path='/' element={<Navigate to='/SignInSide' replace />} /> {/* Defining a route for the root URL */}
+                <Route path='/' element={<Navigate to='/login' replace />} /> {/* Defining a route for the root URL */}
                 <Route path='/dashboard' element={<Products />} />
                 <Route path='/products' element={<Products />} />
                 <Route path='/customers' element={<Customers />} />
@@ -77,7 +77,8 @@ function App() {
                 <Route path='/monthly' element={<Monthly />} />
                 <Route path='/admin' element={<Admin />} />
                 <Route path='/performance' element={<Performance />} />
-                <Route path='/SignInSide' element={<SignInSide/>} />
+                <Route path='/login' element={<Login/>} />
+                <Route path='/signup' element={<Signup/>} />
               </Route>
             </Routes>
           </ThemeProvider>
