@@ -66,7 +66,7 @@ function App() {
             <Routes>
               {/* Setting a default route to the Layout component */}
               <Route element={<Layout />}>
-                <Route path='/' /> {/* Defining a route for the root URL */}
+                <Route path='/' element={<Navigate to='/login' replace />} /> {/* Defining a route for the root URL */}
                 <Route path='/products' element={<Products />} />
                 <Route path='/customers' element={<Customers />} />
                 <Route path='/transactions' element={<Transactions />} />
