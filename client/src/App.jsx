@@ -10,7 +10,7 @@ import { useMemo } from "react";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import { themeSettings } from "./theme"; // Importing theme settings from a separate file
 import { useSelector } from "react-redux"; // Importing useSelector hook from React-Redux for accessing global state
-// import Dashboard from "./scenes/dashboard"; // Importing the Dashboard component
+import Dashboard from "./scenes/dashboard"; // Importing the Dashboard component
 import Layout from "./scenes/layout"; // Importing the Layout component
 import Products from "./scenes/products";
 import Customers from "./scenes/customers";
