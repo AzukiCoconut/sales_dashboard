@@ -1,48 +1,54 @@
-import decode from "jwt-decode";
+import { jwtDecode } from 'jwt-decode';
 
-// create a new class for a user
 class AuthService {
   // get user data
   getProfile() {
-    return decode(this.getToken());
+    const token = this.getToken();
+    if (token) return jwtDecode.default(token);
+    return null;
+  }
+
+  // get user role
+  getRole() {
+    const token = this.getToken();
+    if (token) {
+      const decoded = jwtDecode(token); // No `.default` here
+      return decoded.data.role;
+    }
+    return null;
   }
 
   // check if user's logged in
   loggedIn() {
-    // Checks if there is a saved token and it's still valid
     const token = this.getToken();
-    return !!token && !this.isTokenExpired(token); // handwaiving here
+    return !!token && !this.isTokenExpired(token);
   }
 
   // check if token is expired
   isTokenExpired(token) {
-    try {
-      const decoded = decode(token);
-      if (decoded.exp < Date.now() / 1000) {
-        return true;
-      } else return false;
-    } catch (err) {
-      return false;
-    }
+    if (!token) return true;
+
+    const decoded = jwtDecode(token);
+    const now = Date.now() / 1000;
+    return decoded.exp < now;
   }
 
   getToken() {
-    // Retrieves the user token from localStorage
-    return localStorage.getItem("id_token");
+    return localStorage.getItem('id_token');
   }
 
   login(idToken) {
-    // Saves user token to localStorage
-    localStorage.setItem("id_token", idToken);
-    window.location.assign("/");
+    if (this.isTokenExpired(idToken)) {
+      this.logout(); // Clear token if it's expired
+    } else {
+      localStorage.setItem('id_token', idToken);
+      window.location.assign('/');
+    }
   }
 
   logout() {
-    // Clear user token and profile in localStorage
-    localStorage.removeItem("id_token");
-
-    // this will reload the page and reset app
-    window.location.assign("/");
+    localStorage.removeItem('id_token');
+    window.location.assign('/');
   }
 }
 

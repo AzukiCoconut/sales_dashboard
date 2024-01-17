@@ -24,10 +24,13 @@ const typeDefs = `
     user: User
     sales: [Transaction]
   }
-
   type Auth {
     token: ID
     user: User
+  }
+
+  type NavigationItem {
+    text: String
   }
 
   type Query {
@@ -36,6 +39,7 @@ const typeDefs = `
     customers: [User]
     getGeography: [locationFormatted]
     getAdmins: [User]
+    navigationData: [NavigationItem]
     getUserPerformance(_id: ID!): salesPerformance
     me: User
   }
