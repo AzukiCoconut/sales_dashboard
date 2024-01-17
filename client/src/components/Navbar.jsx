@@ -1,17 +1,17 @@
 // Import necessary dependencies from React, MUI (Material-UI), MUI Icons, and custom components
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   LightModeOutlined,
   DarkModeOutlined,
   Menu as MenuIcon,
   Search,
   SettingsOutlined,
-  ArrowDropDownOutlined
-} from "@mui/icons-material";
-import FlexBetween from "./FlexBetween";
-import { useDispatch } from "react-redux";
-import { setMode } from "../utils";
-import profileImage from "../assets/profile.jpeg";
+  ArrowDropDownOutlined,
+} from '@mui/icons-material';
+import FlexBetween from './FlexBetween';
+import { useDispatch } from 'react-redux';
+import { setMode } from '../utils';
+import profileImage from '../assets/profile.jpeg';
 import {
   AppBar,
   useTheme,
@@ -22,8 +22,9 @@ import {
   Box,
   Typography,
   Menu,
-  MenuItem
-} from "@mui/material";
+  MenuItem,
+} from '@mui/material';
+import Auth from '../utils/auth';
 
 // Define a functional component named Navbar
 const Navbar = ({ user, isSideBarOpen, setIsSideBarOpen }) => {
@@ -45,12 +46,12 @@ const Navbar = ({ user, isSideBarOpen, setIsSideBarOpen }) => {
   return (
     <AppBar
       sx={{
-        position: "static",
-        background: "none",
-        boxShadow: "none"
+        position: 'static',
+        background: 'none',
+        boxShadow: 'none',
       }}
     >
-      <Toolbar sx={{ justifyContent: "space-between" }}>
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
         {/* LEFT SIDE */}
         <FlexBetween>
           {/* IconButton to toggle the sidebar */}
@@ -75,15 +76,15 @@ const Navbar = ({ user, isSideBarOpen, setIsSideBarOpen }) => {
         <FlexBetween gap='1.5rem'>
           {/* IconButton to toggle light/dark mode */}
           <IconButton onClick={() => dispatch(setMode())}>
-            {theme.palette.mode === "dark" ? (
-              <DarkModeOutlined sx={{ fontSize: "25px" }} />
+            {theme.palette.mode === 'dark' ? (
+              <DarkModeOutlined sx={{ fontSize: '25px' }} />
             ) : (
-              <LightModeOutlined sx={{ fontSize: "25px" }} />
+              <LightModeOutlined sx={{ fontSize: '25px' }} />
             )}
           </IconButton>
           {/* IconButton for settings */}
           <IconButton>
-            <SettingsOutlined sx={{ fontSize: "25px" }} />
+            <SettingsOutlined sx={{ fontSize: '25px' }} />
           </IconButton>
 
           {/* Flex container for user profile and dropdown */}
@@ -92,11 +93,11 @@ const Navbar = ({ user, isSideBarOpen, setIsSideBarOpen }) => {
             <Button
               onClick={handleClick}
               sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                textTransform: "none",
-                gap: "1rem"
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                textTransform: 'none',
+                gap: '1rem',
               }}
             >
               <Box
@@ -106,10 +107,10 @@ const Navbar = ({ user, isSideBarOpen, setIsSideBarOpen }) => {
                 height='32px'
                 width='32px'
                 borderRadius='50%'
-                sx={{ objectFit: "cover" }}
+                sx={{ objectFit: 'cover' }}
               />
               <ArrowDropDownOutlined
-                sx={{ color: theme.palette.secondary[300], fontSize: "25px" }}
+                sx={{ color: theme.palette.secondary[300], fontSize: '25px' }}
               />
             </Button>
             {/* User menu */}
@@ -117,10 +118,10 @@ const Navbar = ({ user, isSideBarOpen, setIsSideBarOpen }) => {
               anchorEl={anchorEl}
               open={isOpen}
               onClose={handleClose}
-              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
             >
               {/* Menu item for logging out */}
-              <MenuItem onClick={handleClose}>Log Out</MenuItem>
+              <MenuItem onClick={Auth.logout}>Log Out</MenuItem>
             </Menu>
           </FlexBetween>
         </FlexBetween>
