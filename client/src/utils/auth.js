@@ -37,6 +37,7 @@ class AuthService {
     return localStorage.getItem('id_token');
   }
 
+  // set token to localStorage and redirect to home page
   login(idToken) {
     if (this.isTokenExpired(idToken)) {
       this.logout(); // Clear token if it's expired
