@@ -46,9 +46,10 @@ class AuthService {
     }
   }
 
+  //Logout feature remove token from localStorage and redirect to login page
   logout() {
     localStorage.removeItem('id_token');
-    window.location.assign('/');
+    window.location.assign('/login');
   }
 }
 
