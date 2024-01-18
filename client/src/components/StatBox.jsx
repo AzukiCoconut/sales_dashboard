@@ -2,6 +2,7 @@
 import React from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import FlexBetween from "./FlexBetween";
+import { NumericFormat } from "react-number-format";
 
 // Define a functional component named StatBox
 const StatBox = ({ title, value, increase, icon, description }) => {
@@ -37,9 +38,14 @@ const StatBox = ({ title, value, increase, icon, description }) => {
         fontWeight='600'
         sx={{ color: theme.palette.secondary[200] }}
       >
-        {value}
+        <NumericFormat
+          value={value}
+          thousandSeparator=','
+          prefix='$'
+          displayType='text'
+        />
       </Typography>
-      
+
       {/* Flex container for additional information and description */}
       <FlexBetween gap='1rem'>
         {/* Display of increase information */}
