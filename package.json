@@ -5,9 +5,9 @@
   "scripts": {
     "start":"node server/index.js",
     "develop":"concurrently \"cd server && npm run watch\" \"cd client && run dev\"",
-    "install": "cd server && npm i && cd ../client && npm i --production=false",
-    "build": "cd client && npm run build",
-    "render-build":"npm install & npm run build"
+    "install": "cd server && npm i && cd ../client && npm i",
+    "build": "cd client && npm run build"
+
   },
   "devDependencies": {
     "concurrently": "^7.0.0"
