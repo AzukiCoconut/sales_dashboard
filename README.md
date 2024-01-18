@@ -21,6 +21,7 @@ Key Features:
 - [Installation Instructions](#Installation-Instructions)
 - [Usage Instructions](#Usage-Instructions)
 - [Technologies Used](#Technologies-Used)
+- [Walkthrough Video](#Walkthrough-Video)
 - [Deployed Application Link](#Deployed-Application-Link)
 - [Screenshots](#Screenshots)
 - [Questions](#Questions)
@@ -158,6 +159,9 @@ This web application is hosted on Render [https://render.com/](https://render.co
 - Express.js [Version 4.16.4](https://expressjs.com/)
 - Visual Studio Code: [Website](https://code.visualstudio.com/)
 - Render: [Website](https://render.com/)
+
+## Walkthrough Video:
+[Ocean Wave Sales Dashboard Video](https://drive.google.com/file/d/1o7uHRRf5AvDx5i1W6k1sn5nF1Sv0JqUN/view?usp=sharing)
 
 ## Deployed Application Link
 [Ocean Wave web app](https://sales-dashboard-0x08.onrender.com/)
