@@ -104,7 +104,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
         reverse: false
       }}
       // Format for y-axis values
-      yFormat=' >-.2f'
+      yFormat=' >-,.0f'
       // Curve interpolation type
       curve='catmullRom'
       // Enable area under the line (for dashboard view)

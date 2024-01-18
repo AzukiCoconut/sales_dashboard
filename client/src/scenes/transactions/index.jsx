@@ -5,6 +5,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import Header from "../../components/Header";
 import { GET_TRANSACTIONS } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
+import { NumericFormat } from "react-number-format";
 
 // Transactions component displaying a list of transactions
 const Transactions = () => {
@@ -42,7 +43,16 @@ const Transactions = () => {
       field: "cost",
       headerName: "Cost",
       flex: 1,
-      renderCell: (params) => `$${Number(params.value).toFixed(2)}`
+      renderCell: (params) => (
+        <NumericFormat
+          value={params.value}
+          displayType='text'
+          prefix='$'
+          thousandSeparator=','
+          decimalScale={2}
+          fixedDecimalScale
+        />
+      )
     }
   ];
 

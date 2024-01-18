@@ -88,7 +88,7 @@ const Monthly = () => {
               stacked: false,
               reverse: false
             }}
-            yFormat=' >-.2f'
+            yFormat=' >-,.0f'
             axisTop={null}
             axisRight={null}
             // Configuration for x-axis

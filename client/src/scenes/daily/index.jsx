@@ -140,7 +140,7 @@ const Daily = () => {
               stacked: false,
               reverse: false
             }}
-            yFormat=' >-.2f'
+            yFormat=' >-,.0f'
             curve='catmullRom'
             axisTop={null}
             axisRight={null}

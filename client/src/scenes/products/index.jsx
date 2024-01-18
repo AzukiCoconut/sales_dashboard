@@ -15,6 +15,7 @@ import {
 import Header from "../../components/Header";
 import { useQuery } from "@apollo/client";
 import { PRODUCTS_WITH_STATS } from "../../utils/queries";
+import { NumericFormat } from "react-number-format";
 
 // Product component representing a single product card
 const Product = ({
@@ -80,10 +81,31 @@ const Product = ({
       >
         <CardContent>
           <Typography>id: {_id}</Typography>
-          <Typography>Supply Left: {supply}</Typography>
-          <Typography>Yearly Sales This Year: {yearlySalesTotal}</Typography>
           <Typography>
-            Yearly Units Sold This Year: {yearlyTotalSoldUnits}
+            Supply Left:
+            <NumericFormat
+              value={supply}
+              displayType='text'
+              thousandSeparator=','
+            />
+          </Typography>
+          <Typography>
+            Yearly Sales This Year:
+            <NumericFormat
+              value={yearlySalesTotal}
+              displayType='text'
+              prefix='$'
+              thousandSeparator=','
+            />
+          </Typography>
+          <Typography>
+            Yearly Units Sold This Year:
+            <NumericFormat
+              value={yearlyTotalSoldUnits}
+              displayType='text'
+              prefix='$'
+              thousandSeparator=','
+            />
           </Typography>
         </CardContent>
       </Collapse>
