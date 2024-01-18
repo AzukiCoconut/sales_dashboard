@@ -31,7 +31,7 @@ function Copyright(props) {
     >
       {'Copyright © '}
       <Link color='inherit' href='https://mui.com/'>
-        Your Website
+        Sales Dasboard
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
