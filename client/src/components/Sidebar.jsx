@@ -64,6 +64,10 @@ const Sidebar = ({
   if (userRole === "user") {
     filteredNavItems = [
       {
+        text: "Dashboard",
+        icon: <HomeOutlined />
+      },
+      {
         text: "Client Facing",
         icon: null
       },
