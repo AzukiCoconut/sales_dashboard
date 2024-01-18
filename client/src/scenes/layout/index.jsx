@@ -7,7 +7,7 @@ import { QUERY_ME } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
-// import { useGetUserQuery } from "state/api";
+import Auth from "../../utils/auth";
 
 // Define a functional component named Layout
 function Layout() {
@@ -17,7 +17,8 @@ function Layout() {
   // State to manage the open/closed state of the sidebar
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
   // Extract the userId from the global state using the useSelector hook
-  const userId = useSelector((state) => state.global.userId);
+  const userId = Auth.getProfile();
+
   // Fetch user data based on the userId using the useGetUserQuery hook (commented out)
 
   // Return JSX for rendering the Layout component
@@ -25,7 +26,7 @@ function Layout() {
     <Box display={isNonMobile ? "flex" : "block"} width='100%' height='100%'>
       {/* Sidebar component */}
       <Sidebar
-        //user={data?.me || {}} // Pass user data to the Sidebar component
+        user={userId.data}
         isNonMobile={isNonMobile}
         drawerWidth='250px'
         isSideBarOpen={isSideBarOpen}
@@ -34,7 +35,7 @@ function Layout() {
       <Box flexGrow={1}>
         {/* Navbar component */}
         <Navbar
-          //user={data?.me || {}} // Pass user data to the Navbar component
+          user={userId.data}
           isSideBarOpen={isSideBarOpen}
           setIsSideBarOpen={setIsSideBarOpen}
         />

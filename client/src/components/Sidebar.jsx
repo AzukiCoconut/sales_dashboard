@@ -1,5 +1,5 @@
 // Import necessary dependencies from React, MUI (Material-UI), MUI Icons, and custom components
-import React from 'react';
+import React from "react";
 import {
   Box,
   Divider,
@@ -11,8 +11,8 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-  useTheme,
-} from '@mui/material';
+  useTheme
+} from "@mui/material";
 import {
   LoginOutlined,
   SettingsOutlined,
@@ -27,44 +27,26 @@ import {
   TodayOutlined,
   CalendarMonthOutlined,
   AdminPanelSettingsOutlined,
-  TrendingUpOutlined,
-  PieChartOutlined,
-} from '@mui/icons-material';
-import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import FlexBetween from '../components/FlexBetween';
-import profileImage from '../assets/profile.jpeg';
-import AuthService from '../utils/auth';
-
-// Define navigation items for the sidebar
-const navItems = [
-  { text: 'Dashboard', icon: <HomeOutlined /> },
-  { text: 'Client Facing', icon: null },
-  { text: 'Products', icon: <ShoppingCartOutlined /> },
-  { text: 'Customers', icon: <Groups2Outlined /> },
-  { text: 'Transactions', icon: <ReceiptLongOutlined /> },
-  { text: 'Geography', icon: <PublicOutlined /> },
-  { text: 'Sales', icon: null },
-  { text: 'Overview', icon: <PointOfSaleOutlined /> },
-  { text: 'Daily', icon: <TodayOutlined /> },
-  { text: 'Monthly', icon: <CalendarMonthOutlined /> },
-  { text: 'Management', icon: null },
-  { text: 'Admin', icon: <AdminPanelSettingsOutlined /> },
-  { text: 'Performance', icon: <TrendingUpOutlined /> },
-];
+  TrendingUpOutlined
+} from "@mui/icons-material";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import FlexBetween from "../components/FlexBetween";
+import profileImage from "../assets/profile.jpeg";
+import AuthService from "../utils/auth";
 
 // Define a functional component named Sidebar
 const Sidebar = ({
-  // user,
+  user,
   drawerWidth,
   isSideBarOpen,
   setIsSideBarOpen,
-  isNonMobile,
+  isNonMobile
 }) => {
   // Access the location object from React Router
   const { pathname } = useLocation();
   // State to manage the active menu item
-  const [active, setActive] = useState('');
+  const [active, setActive] = useState("");
   // Access the navigate function from React Router
   const navigate = useNavigate();
   // Access the theme object using the useTheme hook
@@ -77,41 +59,131 @@ const Sidebar = ({
 
   // Fetch the user role
   const userRole = AuthService.getRole();
-
+  let filteredNavItems = [];
   // Filter the navItems based on user role
-  const filteredNavItems = navItems.filter((item) => {
-    if (userRole === 'admin') {
-      return [
-        'Products',
-        'Customers',
-        'Transactions',
-        'Geography',
-        'Overview',
-        'Daily',
-        'Monthly',
-      ].includes(item.text);
-    } else if (userRole === 'user') {
-      // Define which items the 'user' should see
-      return ['Products', 'Customers', 'Transactions', 'Geography'].includes(
-        item.text
-      );
-    } else if (userRole === 'superadmin') {
-      // Define which items the 'superadmin' should see
-      return [
-        'Products',
-        'Customers',
-        'Transactions',
-        'Geography',
-        'Overview',
-        'Daily',
-        'Monthly',
-        'Admin',
-        'Performance',
-        'Dashboard',
-      ].includes(item.text);
-    }
-    return false;
-  });
+  if (userRole === "user") {
+    filteredNavItems = [
+      {
+        text: "Client Facing",
+        icon: null
+      },
+      {
+        text: "Products",
+        icon: <ShoppingCartOutlined />
+      },
+      {
+        text: "Customers",
+        icon: <Groups2Outlined />
+      },
+      {
+        text: "Transactions",
+        icon: <ReceiptLongOutlined />
+      },
+      {
+        text: "Geography",
+        icon: <PublicOutlined />
+      }
+    ];
+  } else if (userRole === "admin") {
+    filteredNavItems = [
+      {
+        text: "Dashboard",
+        icon: <HomeOutlined />
+      },
+      {
+        text: "Client Facing",
+        icon: null
+      },
+      {
+        text: "Products",
+        icon: <ShoppingCartOutlined />
+      },
+      {
+        text: "Customers",
+        icon: <Groups2Outlined />
+      },
+      {
+        text: "Transactions",
+        icon: <ReceiptLongOutlined />
+      },
+      {
+        text: "Geography",
+        icon: <PublicOutlined />
+      },
+      {
+        text: "Sales",
+        icon: null
+      },
+      {
+        text: "Overview",
+        icon: <PointOfSaleOutlined />
+      },
+      {
+        text: "Daily",
+        icon: <TodayOutlined />
+      },
+      {
+        text: "Monthly",
+        icon: <CalendarMonthOutlined />
+      }
+    ];
+  } else if (userRole === "superadmin") {
+    filteredNavItems = [
+      {
+        text: "Dashboard",
+        icon: <HomeOutlined />
+      },
+      {
+        text: "Client Facing",
+        icon: null
+      },
+      {
+        text: "Products",
+        icon: <ShoppingCartOutlined />
+      },
+      {
+        text: "Customers",
+        icon: <Groups2Outlined />
+      },
+      {
+        text: "Transactions",
+        icon: <ReceiptLongOutlined />
+      },
+      {
+        text: "Geography",
+        icon: <PublicOutlined />
+      },
+      {
+        text: "Sales",
+        icon: null
+      },
+      {
+        text: "Overview",
+        icon: <PointOfSaleOutlined />
+      },
+      {
+        text: "Daily",
+        icon: <TodayOutlined />
+      },
+      {
+        text: "Monthly",
+        icon: <CalendarMonthOutlined />
+      },
+
+      {
+        text: "Management",
+        icon: null
+      },
+      {
+        text: "Admin",
+        icon: <AdminPanelSettingsOutlined />
+      },
+      {
+        text: "Performance",
+        icon: <TrendingUpOutlined />
+      }
+    ];
+  } else return false;
 
   // Return JSX for rendering the Sidebar
   return (
@@ -125,13 +197,13 @@ const Sidebar = ({
           anchor='left'
           sx={{
             width: drawerWidth,
-            '& .MuiDrawer-paper': {
+            "& .MuiDrawer-paper": {
               color: theme.palette.secondary[200],
               backgroundColor: theme.palette.background.alt,
-              boxSizing: 'border-box',
-              borderWidth: isNonMobile ? 0 : '2px',
-              width: drawerWidth,
-            },
+              boxSizing: "border-box",
+              borderWidth: isNonMobile ? 0 : "2px",
+              width: drawerWidth
+            }
           }}
         >
           <Box width='100%'>
@@ -158,7 +230,7 @@ const Sidebar = ({
                 // Render a simple Typography for non-icon items
                 if (!icon) {
                   return (
-                    <Typography key={text} sx={{ m: '2.25rem 0 1rem 3rem' }}>
+                    <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
                       {text}
                     </Typography>
                   );
@@ -179,21 +251,21 @@ const Sidebar = ({
                         backgroundColor:
                           active === lcText
                             ? theme.palette.secondary[300]
-                            : 'transparent',
+                            : "transparent",
                         color:
                           active === lcText
                             ? theme.palette.primary[600]
-                            : theme.palette.secondary[100],
+                            : theme.palette.secondary[100]
                       }}
                     >
                       {/* Icon for the navigation item */}
                       <ListItemIcon
                         sx={{
-                          ml: '2rem',
+                          ml: "2rem",
                           color:
                             active === lcText
                               ? theme.palette.primary[600]
-                              : theme.palette.secondary[200],
+                              : theme.palette.secondary[200]
                         }}
                       >
                         {icon}
@@ -202,7 +274,7 @@ const Sidebar = ({
                       <ListItemText primary={text} />
                       {/* Chevron icon for the active item */}
                       {active === lcText && (
-                        <ChevronRightOutlined sx={{ ml: 'auto' }} />
+                        <ChevronRightOutlined sx={{ ml: "auto" }} />
                       )}
                     </ListItemButton>
                   </ListItem>
@@ -224,13 +296,28 @@ const Sidebar = ({
                 height='40px'
                 width='40px'
                 borderRadius='50%'
-                sx={{ objectFit: 'cover' }}
+                sx={{ objectFit: "cover" }}
               />
+              <Box textAlign='left'>
+                <Typography
+                  fontWeight='bold'
+                  fontSize='0.9rem'
+                  sx={{ color: theme.palette.secondary[100] }}
+                >
+                  {user.name}
+                </Typography>
+                <Typography
+                  fontSize='0.8rem'
+                  sx={{ color: theme.palette.secondary[200] }}
+                >
+                  {user.occupation}
+                </Typography>
+              </Box>
               {/* Settings icon */}
               <SettingsOutlined
                 sx={{
                   color: theme.palette.secondary[300],
-                  fontSize: '25px',
+                  fontSize: "25px"
                 }}
               />
             </FlexBetween>
