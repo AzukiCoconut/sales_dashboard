@@ -6,21 +6,27 @@ import AuthService from '../utils/auth';
 const AuthHandler = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
 
-  //This useEffect will run every time the component is rendered\
-  //It will check if the token is expired and if it is it will remove it from localStorage
-  //and redirect to login page
   useEffect(() => {
+    // get token from localStorage
+    // if token is expired remove it from localStorage and redirect to login page
+    // else set isAuthenticated to true
+    // if there is no token set isAuthenticated to false
     const token = localStorage.getItem('id_token');
-    if (AuthService.isTokenExpired(token)) {
-      localStorage.removeItem('id_token');
-      setIsAuthenticated(false);
-      navigate('/login', { replace: true });
+
+    if (token) {
+      if (AuthService.isTokenExpired(token)) {
+        localStorage.removeItem('id_token');
+        setIsAuthenticated(false);
+        navigate('/login', { replace: true });
+      } else {
+        setIsAuthenticated(true);
+      }
     } else {
-      setIsAuthenticated(true);
+      setIsAuthenticated(false);
     }
   }, [navigate, setIsAuthenticated]);
 
-  return null; // This component don't  render anything
+  return null;
 };
 
 export default AuthHandler;

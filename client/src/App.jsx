@@ -89,10 +89,7 @@ function App() {
                   <Route path='/monthly' element={<Monthly />} />
                   <Route path='/admin' element={<Admin />} />
                   <Route path='/performance' element={<Performance />} />
-                  <Route
-                    path='*'
-                    element={<Navigate to='/products' replace />}
-                  />
+                  <Route path='*' element={<Navigate to='/' replace />} />
                 </Route>
               )}
             </Routes>

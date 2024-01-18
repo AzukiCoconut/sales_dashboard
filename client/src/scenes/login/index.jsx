@@ -37,8 +37,6 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 export default function Login({ setIsAuthenticated }) {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -59,7 +57,7 @@ export default function Login({ setIsAuthenticated }) {
 
     try {
       const { data } = await login({ variables: { ...userFormData } });
-      AuthService.login(data.login.token);
+      AuthService.login(data.login.token, navigate);
       setIsAuthenticated(true);
       console.log('Navigating to product');
       navigate('/products', { replace: true });

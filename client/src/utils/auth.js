@@ -27,7 +27,6 @@ class AuthService {
   // check if token is expired
   isTokenExpired(token) {
     if (!token) return true;
-
     const decoded = jwtDecode(token);
     const now = Date.now() / 1000;
     return decoded.exp < now;
@@ -38,12 +37,12 @@ class AuthService {
   }
 
   // set token to localStorage and redirect to home page
-  login(idToken) {
-    if (this.isTokenExpired(idToken)) {
-      this.logout(); // Clear token if it's expired
+  login(idToken, navigate) {
+    localStorage.setItem('id_token', idToken);
+    if (!this.isTokenExpired(idToken)) {
+      navigate('/');
     } else {
-      localStorage.setItem('id_token', idToken);
-      window.location.assign('/');
+      this.logout();
     }
   }
 
