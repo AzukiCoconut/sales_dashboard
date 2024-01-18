@@ -9,7 +9,7 @@ export default defineConfig({
     open: true,
     proxy: {
       "/graphql": {
-        target: "http://localhost:5001",
+        target: `${process.env.REACT_APP_BASE_URL}:5001`,
         secure: false,
         changeOrigin: true
       }
