@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "concurrently \"npm:start --prefix client\" \"npm:start --prefix server\"",
-    "client": "npm start --prefix client",
-    "server": "npm start --prefix server"
+    "start":"node server/index.js",
+    "develop":"concurrently \"cd server && npm run watch\" \"cd client && run dev\"",
+    "install": "cd server && npm i && cd ../client && npm i --production=false",
+    "build": "cd client && npm run build",
+    "render-build":"npm install & npm run build"
   },
   "devDependencies": {
     "concurrently": "^7.0.0"
