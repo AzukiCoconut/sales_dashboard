@@ -47,6 +47,7 @@ export default function Signup() {
     name: '',
     email: '',
     password: '',
+    occupation: '',
   });
   const [showAlert, setShowAlert] = useState(false);
   const [addUser, { error }] = useMutation(ADD_USER);
@@ -67,6 +68,7 @@ export default function Signup() {
           name: userFormData.name,
           email: userFormData.email,
           password: userFormData.password,
+          occupation: userFormData.occupation,
         },
       });
       //login method from the AuthService.js file to log the user in after they have signed up.
@@ -125,6 +127,17 @@ export default function Signup() {
                   label='Email Address'
                   name='email'
                   autoComplete='email'
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id='occupation'
+                  label='Occupation'
+                  name='occupation'
+                  autoComplete='occupation'
                   onChange={handleChange}
                 />
               </Grid>

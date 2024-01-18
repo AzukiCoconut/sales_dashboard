@@ -30,37 +30,69 @@ Key Features:
 # Overview
 
 ## Challenge
-```md
-"With your group, you’ll again conceive and execute a design that solves a real-world problem. In creating your first collaborative MERN-stack single-page application, you’ll combine a scalable MongoDB back end, a GraphQL API, and an Express.js and Node.js server with a React front end, implementing user authentication with JWT to build a user-focused platform. You’ll continue to build on the agile development methodologies you’ve used throughout this course. These include storing your project code in GitHub, managing your work with a project management tool, and implementing feature and bug fixes using the Git branch workflow and pull requests.
+"With your group, you’ll again conceive and execute a design that solves a real-world problem. 
+In creating your first collaborative MERN-stack single-page application, you’ll combine a 
+scalable MongoDB back end, a GraphQL API, and an Express.js and Node.js server with a React 
+front end, implementing user authentication with JWT to build a user-focused platform. 
+You’ll continue to build on the agile development methodologies you’ve used throughout this 
+course. These include storing your project code in GitHub, managing your work with a project 
+management tool, and implementing feature and bug fixes using the Git branch workflow and 
+pull requests.
 
-For this project, you should start from scratch. Doing so will allow you to revisit your front-end abilities in the context of React and solidify your understanding of working with multiple servers in a MERN application. Your skills have continued to improve since the first two projects, so naturally your approach will be different considering the experience you’ve gained with each new application you’ve built.
+For this project, you should start from scratch. Doing so will allow you to revisit your 
+front-end abilities in the context of React and solidify your understanding of working with 
+multiple servers in a MERN application. Your skills have continued to improve since the 
+first two projects, so naturally your approach will be different considering the experience 
+you’ve gained with each new application you’ve built.
 
-Your group will use everything you’ve learned throughout this course to create a MERN-stack single-page application that works with real-world data to solve a real-world challenge, with a focus on data and user demand. This project will provide you with the best opportunity to demonstrate your problem-solving skills, which employers will want to observe."
-```
+Your group will use everything you’ve learned throughout this course to create a MERN-stack 
+single-page application that works with real-world data to solve a real-world challenge, with 
+a focus on data and user demand. This project will provide you with the best opportunity to 
+demonstrate your problem-solving skills, which employers will want to observe."
 
 ## User Story
 
 ```md
-AS A developer tasked with creating a Sales Dashboard from scratch, I aim to build a robust and user-friendly platform that provides comprehensive insights into sales operations.
+AS A developer tasked with creating a Sales Dashboard from scratch, 
+I aim to build a robust and user-friendly platform that provides 
+comprehensive insights into sales operations.
 ```
 
 ## Acceptance Criteria
 
 ```md
-As a developer, I will choose the MERN (MongoDB, Express.js, React, Node.js) stack as the foundation for the Sales Dashboard.
-As a developer, I will set up the frontend using React, creating a modular and responsive interface that caters to both desktop and mobile users.
-As a developer, I will design and implement the Express.js backend, establishing the necessary routes, controllers, and middleware for seamless communication with the frontend.
-As a developer, I will integrate MongoDB as the database, creating appropriate collections to store data related to products, customers, transactions, and performance metrics.
-As a developer, I will incorporate real-time updates using technologies like WebSockets, ensuring users receive immediate insights into sales activities.
-As a developer, I will implement a secure user authentication system, following best practices to protect sensitive data.
-As a developer, I will create modular components for various aspects of the sales dashboard, including product listings, customer details, transaction summaries, and performance metrics.
-As a developer, I will design a flexible framework that allows users to customize their dashboard views, providing a personalized experience.
-As a developer, I will develop API endpoints to retrieve performance metrics, such as total sales, yearly sales, and units sold.
-As a developer, I will implement API endpoints to fetch detailed information on individual sales transactions, facilitating thorough analysis.
-As a developer, I will implement robust security measures, including secure data storage, encrypted communication, and protection against common vulnerabilities.
-As a developer, I will create comprehensive documentation covering the project structure, API endpoints, and deployment instructions for future reference.
-As a developer, I will write unit tests for critical components and functionalities to ensure the reliability and stability of the Sales Dashboard.
-As a developer, I will deploy the Sales Dashboard on a suitable hosting platform, ensuring scalability and reliability.
+As a developer, I will choose the MERN (MongoDB, Express.js, React, Node.js) 
+stack as the foundation for the Sales Dashboard.
+As a developer, I will set up the frontend using React, creating a modular and 
+responsive interface that caters to both desktop and mobile users.
+As a developer, I will design and implement the Express.js backend, establishing 
+the necessary routes, controllers, and middleware for seamless communication 
+with the frontend.
+As a developer, I will integrate MongoDB as the database, creating appropriate 
+collections to store data related to products, customers, transactions, and 
+performance metrics.
+As a developer, I will incorporate real-time updates using technologies like 
+WebSockets, ensuring users receive immediate insights into sales activities.
+As a developer, I will implement a secure user authentication system, following 
+best practices to protect sensitive data.
+As a developer, I will create modular components for various aspects of the sales 
+dashboard, including product listings, customer details, transaction summaries, 
+and performance metrics.
+As a developer, I will design a flexible framework that allows users to customize 
+their dashboard views, providing a personalized experience.
+As a developer, I will develop API endpoints to retrieve performance metrics, 
+such as total sales, yearly sales, and units sold.
+As a developer, I will implement API endpoints to fetch detailed information 
+on individual sales transactions, facilitating thorough analysis.
+As a developer, I will implement robust security measures, including secure 
+data storage, encrypted communication, and protection against common 
+vulnerabilities.
+As a developer, I will create comprehensive documentation covering the project 
+structure, API endpoints, and deployment instructions for future reference.
+As a developer, I will write unit tests for critical components and functionalities 
+to ensure the reliability and stability of the Sales Dashboard.
+As a developer, I will deploy the Sales Dashboard on a suitable hosting platform, 
+ensuring scalability and reliability.
 ```
 
 ## Installation Instructions
