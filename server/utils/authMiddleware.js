@@ -1,18 +1,18 @@
-const jwt = require('jsonwebtoken');
-require('dotenv').config();
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 // sign token this function will receive a user object and return a token for that user
-const signToken = ({ name, email, _id, role }) => {
-  const payload = { name, email, _id, role };
+const signToken = ({ name, email, _id, role, occupation }) => {
+  const payload = { name, email, _id, role, occupation };
   return jwt.sign({ data: payload }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRE,
+    expiresIn: process.env.JWT_EXPIRE
   });
 };
 
 // auth middleware this function will receive the request object as a parameter
 const authMiddleware = ({ req }) => {
-  let token = req.headers.authorization || '';
-  if (token.startsWith('Bearer ')) {
+  let token = req.headers.authorization || "";
+  if (token.startsWith("Bearer ")) {
     token = token.slice(7, token.length);
   }
   // if there is no token, return the request object as is
@@ -25,7 +25,7 @@ const authMiddleware = ({ req }) => {
         req.user.role = decoded.data.role;
       }
     } catch (error) {
-      console.log('Invalid token:', error);
+      console.log("Invalid token:", error);
     }
   }
 
@@ -36,7 +36,7 @@ const roleMiddleware = (requiredRole) => (req, res, next) => {
   if (req.user && req.user.role === requiredRole) {
     next();
   } else {
-    res.status(401).json({ message: 'Unauthorized' });
+    res.status(401).json({ message: "Unauthorized" });
   }
 };
 module.exports = { signToken, authMiddleware, roleMiddleware };

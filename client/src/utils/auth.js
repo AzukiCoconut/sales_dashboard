@@ -1,10 +1,10 @@
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 class AuthService {
   // get user data
   getProfile() {
     const token = this.getToken();
-    if (token) return jwtDecode.default(token);
+    if (token) return jwtDecode(token);
     return null;
   }
 
@@ -33,7 +33,7 @@ class AuthService {
   }
 
   getToken() {
-    return localStorage.getItem('id_token');
+    return localStorage.getItem("id_token");
   }
 
   // set token to localStorage and redirect to home page
@@ -48,8 +48,8 @@ class AuthService {
 
   //Logout feature remove token from localStorage and redirect to login page
   logout() {
-    localStorage.removeItem('id_token');
-    window.location.assign('/login');
+    localStorage.removeItem("id_token");
+    window.location.assign("/login");
   }
 }
 
