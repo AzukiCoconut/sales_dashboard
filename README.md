@@ -2,9 +2,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Description
-Sales Dashboard serves as a centralized platform for monitoring and analyzing various facets of your sales operations, encompassing products, customers, transactions, and performance metrics.
+Ocean Wave is a sales dashboard that functions as a centralized platform for monitoring and analyzing various facets of your sales operations, including products, customers, transactions, and performance metrics.
 
-Designed with a user-centric approach, our dashboard provides an intuitive and visually appealing interface. It goes beyond mere data presentation; it focuses on creating an immersive experience that facilitates informed, data-driven decision-making.
+Crafted with a user-centric approach, our dashboard provides an intuitive and visually appealing interface. It goes beyond mere data presentation; it focuses on creating an immersive experience that facilitates informed, data-driven decision-making.
 
 Key Features:
 
@@ -30,6 +30,8 @@ Key Features:
 # Overview
 
 ## Challenge
+
+```md
 "With your group, you’ll again conceive and execute a design that solves a real-world problem. 
 In creating your first collaborative MERN-stack single-page application, you’ll combine a 
 scalable MongoDB back end, a GraphQL API, and an Express.js and Node.js server with a React 
@@ -49,6 +51,7 @@ Your group will use everything you’ve learned throughout this course to create
 single-page application that works with real-world data to solve a real-world challenge, with 
 a focus on data and user demand. This project will provide you with the best opportunity to 
 demonstrate your problem-solving skills, which employers will want to observe."
+```
 
 ## User Story
 
@@ -154,22 +157,23 @@ This web application is hosted on Render [https://render.com/](https://render.co
 - Node.js [Version 16.18.1](https://nodejs.org/en/blog/release/v16.18.1/)
 - Express.js [Version 4.16.4](https://expressjs.com/)
 - Visual Studio Code: [Website](https://code.visualstudio.com/)
-- Netlify: [Website](https://app.netlify.com/)
+- Render: [Website](https://render.com/)
 
 ## Deployed Application Link
-[Sales Dashboard](link here/)
+[Ocean Wave web app](https://sales-dashboard-0x08.onrender.com/)
 
 ## Screenshots
-![Screenshot](./Screenshots/1.png)
-![Screenshot](./Screenshots/2.png)
-![Screenshot](./Screenshots/3.png)
-![Screenshot](./Screenshots/4.png)
-![Screenshot](./Screenshots/5.png)
-![Screenshot](./Screenshots/6.png)
+![Screenshot](./client/src/assets/1.png)
+![Screenshot](./client/src/assets/2.png)
+![Screenshot](./client/src/assets/3.png)
+![Screenshot](./client/src/assets/4.png)
+![Screenshot](./client/src/assets/5.png)
+![Screenshot](./client/src/assets/6.png)
+![Screenshot](./client/src/assets/7.png)
 
 ## Questions?
 
-If you have any questions related with Sales Dashboard web app, feel free to reach us through email or GitHub:
+If you have any questions related with Ocean Wave Sales Dashboard web app, feel free to reach us through email or GitHub:
 
 [matthew.tingley@bellaliant.net](matthew.tingley@bellaliant.net) / [AzukiCoconut](https://github.com/AzukiCoconut)
 
