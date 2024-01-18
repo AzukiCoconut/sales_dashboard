@@ -1,52 +1,52 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from "react";
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import { CssBaseline, ThemeProvider } from '@mui/material';
-import { createTheme } from '@mui/material/styles';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { themeSettings } from './theme';
-import Dashboard from './scenes/dashboard';
-import Layout from './scenes/layout';
-import Products from './scenes/products';
-import Customers from './scenes/customers';
-import Transactions from './scenes/transactions';
-import Geography from './scenes/geography';
-import Overview from './scenes/overview';
-import Daily from './scenes/daily';
-import Monthly from './scenes/monthly';
-import Admin from './scenes/admin';
-import Performance from './scenes/performance';
-import Login from './scenes/login';
-import Signup from './scenes/signup';
-import AuthHandler from './components/AuthHandler';
+  createHttpLink
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { themeSettings } from "./theme";
+import Dashboard from "./scenes/dashboard";
+import Layout from "./scenes/layout";
+import Products from "./scenes/products";
+import Customers from "./scenes/customers";
+import Transactions from "./scenes/transactions";
+import Geography from "./scenes/geography";
+import Overview from "./scenes/overview";
+import Daily from "./scenes/daily";
+import Monthly from "./scenes/monthly";
+import Admin from "./scenes/admin";
+import Performance from "./scenes/performance";
+import Login from "./scenes/login";
+import Signup from "./scenes/signup";
+import AuthHandler from "./components/AuthHandler";
 
 // ... existing Apollo Client setup ...
 //function to create a new link to the GraphQL server at /graphql.
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql"
 });
 //function to retrieve the token from localStorage
 const authLink = setContext((_, { headers }) => {
   // Get the authentication token from local storage if it exists
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   // Return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
+      authorization: token ? `Bearer ${token}` : ""
+    }
   };
 });
 //Client instance that connects to the API server using the authentication token
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache()
 });
 
 function App() {
@@ -79,6 +79,10 @@ function App() {
               ) : (
                 // Protected Routes
                 <Route element={<Layout />}>
+                  <Route
+                    path='/'
+                    element={<Navigate to='/dashboard' replace />}
+                  />
                   <Route path='/dashboard' element={<Dashboard />} />
                   <Route path='/products' element={<Products />} />
                   <Route path='/customers' element={<Customers />} />
