@@ -26,6 +26,7 @@ import {
 } from "@mui/material";
 import Auth from "../utils/auth";
 
+// // THIS COMPONENT WAS STYLED BY EDROH https://github.com/ed-roh/ and used with permission.
 // Define a functional component named Navbar
 const Navbar = ({ user, isSideBarOpen, setIsSideBarOpen }) => {
   // Access the Redux dispatch function

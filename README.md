@@ -202,6 +202,10 @@ Hui Pan [HuiPan-Peter](https://github.com/HuiPan-Peter)
 
 Fernando Ibarra [fibarrafdec](https://github.com/fibarrafdec)
 
+Some of the components were developed and/or styled by Ed Roh [edroh](https://github.com/ed-roh/) and used with permission
+
+We would also like to acknowledge that the data used in our database was provided to us by Ed Roh [edroh](https://github.com/ed-roh/) and used with permission.
+
 ## License & Copyright ©
 This application is covered under the MIT License.
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)

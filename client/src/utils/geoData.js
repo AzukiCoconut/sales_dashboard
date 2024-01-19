@@ -1,3 +1,5 @@
+// GEODATA PROVIDED BY NIVO CHARTS AT https://nivo.rocks
+
 export const geoData = {
   type: "FeatureCollection",
   features: [

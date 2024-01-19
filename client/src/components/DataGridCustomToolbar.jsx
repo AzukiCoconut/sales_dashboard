@@ -10,6 +10,7 @@ import {
 } from "@mui/x-data-grid";
 import FlexBetween from "./FlexBetween";
 
+// NOT USED IN THIS PROJECT
 // Define a React functional component named DataGridCustomToolbar
 const DataGridCustomToolbar = ({ searchInput, setSearchInput, setSearch }) => {
   return (

@@ -5,8 +5,9 @@ import React from "react";
 // Define a functional component named Header
 const Header = ({ title, subtitle }) => {
   // Access the theme object using the useTheme hook
-  const theme = useTheme();
 
+  const theme = useTheme();
+  // THIS COMPONENT WAS STYLED BY EDROH https://github.com/ed-roh/ and used with permission
   // Return JSX for rendering the header
   return (
     <Box>
