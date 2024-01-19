@@ -2,6 +2,7 @@
 import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 
+// THIS COMPONENT WAS DEVELOPED BY EDROH https://github.com/ed-roh/ and used with permission
 // Define a styled component named FlexBetween based on MUI's Box component
 const FlexBetween = styled(Box)({
   // Set the styled component's display property to 'flex'

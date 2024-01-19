@@ -5,6 +5,7 @@ import { useTheme } from "@mui/material";
 import { useQuery } from "@apollo/client";
 import { GET_SALES } from "../utils/queries.js";
 
+// THE NIVO CHART WAS STYLED BY EDROH BUT THE DATA WAS IMPLEMENTED BY TEAM 3
 // Define a functional component named OverviewChart
 const OverviewChart = ({ isDashboard = false, view }) => {
   // Access the theme object using the useTheme hook

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// Redux state management to handle the switch between light & dark themes.
 const initialState = {
   mode: "dark"
 };
