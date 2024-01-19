@@ -106,7 +106,7 @@ This web application is hosted on Render [https://render.com/](https://render.co
 ## Usage Instructions
 
 1. Accessing the Dashboard: Visit the [Deployed Application Link](#Deployed-Application-Link).
-2. User Authentication: Enter your credentials (username/password) to log in. Ensure you have the necessary permissions to access the sales dashboard.
+2. User Authentication: Enter your credentials (username: matt@email.com/password: password1234) to log in. Ensure you have the necessary permissions to access the sales dashboard.
 3. Dashboard Overview: Upon successful login, you'll be directed to the main dashboard. Familiarize yourself with the layout and navigation options.
 4. Navigation Menu: Explore the navigation menu to discover different sections and features of the dashboard.
 5. Navigate through each of the sections and consult the information provided.
